@@ -1,16 +1,12 @@
-name: inverse
-layout: true
 class: center, middle, inverse
-
----
 
 # xonsh
 
 Bringing Python data science to your shell!
 
----
+![](/ascii_conch_part_transparent_tight.png)
 
-layout: false
+---
 
 # Agenda
 
