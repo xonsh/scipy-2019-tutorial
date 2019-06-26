@@ -1,13 +1,16 @@
-
-class: center, middle
-
-# My Awesome Presentation
-
-???
-
-Notes for the _first_ slide!
+name: inverse
+layout: true
+class: center, middle, inverse
 
 ---
+
+# xonsh
+
+Bringing Python data science to your shell!
+
+---
+
+layout: false
 
 # Agenda
 
