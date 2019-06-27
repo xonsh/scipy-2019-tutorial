@@ -2,12 +2,22 @@ a, a > code {
   color: rgb(249, 38, 114);
   text-decoration: none;
 }
+li p { line-height: 1.25em; }
+.red { color: #fa0000; }
+.large { font-size: 2em; }
+
+code {
+  background: #e7e8e2;
+  border-radius: 5px;
+}
+
 .footnote {
   position: absolute;
   bottom: 3em;
   padding-right: 4em;
   font-size: 90%;
 }
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
 .inverse {
