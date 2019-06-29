@@ -393,9 +393,94 @@ xonsh: subprocess mode: command not found: echo hello there
 Glob ticks and regex ticks
 
 ---
-# Path string literals
+# `xonsh` string literals
 
-p-strings, f-strings and pf-strings
+.left-column[
+
+ ## `f""`
+
+]
+.right-column[
+
+f-strings, or formatted string literals, are a part of Python 3.6+ and they are _great_.
+
+```bash
+$ x = 5
+$ print(f"x is {x}")
+x is 5
+```
+
+`xonsh` supports f-strings (so long as your underlying Python is 3.6+) and it
+also has a few _extra_ tricks up its sleeves!
+
+]
+---
+# path string literals
+
+.left-column[
+
+ ## `f""`
+ ## `p""`
+
+]
+.right-column[
+
+p-strings are a `xonsh` feature that allow easy construction of `pathlib.Path`s.
+Any string that has a leading `p` becomes a `Path`.
+
+```bash
+$ path = p"my_cool_folder"
+$ path
+PosixPath('my_cool_folder')
+$ path.exists()
+False
+```
+
+If you haven't used `pathlib` before, take a moment to look through all of the
+`Path` attributes and methods -- they're super useful!
+
+Also try out using the `/` operator with a `pathlib.Path`.
+
+**Note:** Your OS will determine what _sort_ of path object you get.
+
+]
+---
+# formatted path string literals
+
+.left-column[
+
+ ## `f""`
+ ## `p""`
+ ## `pf""`
+
+]
+.right-column[
+
+There are p-strings and f-strings, which leads to a natural question -- what
+about pf-strings?
+
+Yup, we have those, too!
+
+```bash
+$ home = "home"
+$ user = "gil"
+$ gitdir = "github.com"
+$ p = pf"/{home}/{user}/{gitdir}"
+$ p
+PosixPath('/home/gil/github.com')
+```
+
+But wait! Environment variables are also Python objects:
+
+```bash
+$ p = pf"{$HOME}/{gitdir}"
+$ p
+PosixPath('/home/gil/github.com')
+```
+
+Pretty cool, huh?
+]
+
 ---
 # Exercises
 ---
