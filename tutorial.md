@@ -17,7 +17,7 @@ layout: false
 
 **conda**:
 
-```bashcon
+```bash
 $ conda install -c conda-forge xonsh
 ```
 
@@ -25,7 +25,7 @@ $ conda install -c conda-forge xonsh
 
 or, if you must, **pip**:
 
-```bashcon
+```bash
 $ pip install "xonsh[pygments,ptk,<linux|mac|win>]"
 ```
 
@@ -92,7 +92,7 @@ class: center, middle, inverse
 .right-column[
 `$()` captures the standard output of a command and returns it as a string.
 
-```bashcon
+```bash
 $ x = $(ls)
 $ x
 'LICENSE\nREADME.md\nascii_conch_part_transparent_tight.png\ndefault.css\nfavicon.ico\nremote.html\ntutorial.md\n'
@@ -117,7 +117,7 @@ tutorial.md
 .right-column[
 And it really is a `str` with all the methods you would expect:
 
-```bashcon
+```bash
 $ x.upper()
 'LICENSE\nREADME.MD\nASCII_CONCH_PART_TRANSPARENT_TIGHT.PNG\nDEFAULT.CSS\nFAVICON.ICO\nREMOTE.HTML\nTUTORIAL.MD\n'
 $ x.split("\n")
@@ -146,7 +146,7 @@ $ x.split("\n")
 Beyond the output, `!()` offers the return code, process id, `stderr` and
 `stdout` streams, whether the `cmd` is an alias, timestamps, and more!
 
-```bashcon
+```bash
 $ x = !(ls)
 $ x
 CommandPipeline(stdin=<_io.BytesIO object at 0x7fc0d01be4c0>, stdout=<_io.BytesIO object at 0x7fc0d01be6d0>, stderr=<_io.BytesIO object at 0x7fc0d01bea40>, pid=16969, returncode=0, args=['ls'], alias=['ls', '--color=auto', '-v'], stdin_redirect=['<stdin>', 'r'], stdout_redirect=[10, 'wb'], stderr_redirect=[12, 'w'], timestamps=[1561758574.868479, 1561758575.6660624], executed_cmd=['/usr/bin/ls', '--color=auto', '-v'], input=, output=LICENSE
@@ -173,7 +173,7 @@ tutorial.md
 `!()` returns an instance of a `CommandPipeline` object -- this object is
 "truthy" if the command completed successfully:
 
-```bashcon
+```bash
 $ bool(!(ls .))
 True
 $ bool(!(ls nothingtoseehere))
@@ -193,7 +193,7 @@ False
 .right-column[
 You can iterate over the output from `!()` line-by-line:
 
-```bashcon
+```bash
 $ for i, loc in enumerate(!(ls)):
 °     print(f"{i}th: {loc.strip()}")
 °
@@ -239,7 +239,7 @@ You may be asking, what is this even for?
 More on that later, but the short answer is that it allows you to force `xonsh`
 to recognize a command as a subprocess command if the context is ambiguous.
 
-```bashcon
+```bash
 $ x = $[ls .]
 LICENSE    ascii_conch_part_transparent_tight.png  favicon.ico  tutorial.md
 README.md  default.css
@@ -259,7 +259,7 @@ README.md  default.css
 .right-column[
 `![]` streams command output to `stdout` but also returns an instance of a `HiddenCommandPipeline` object.
 
-```bashcon
+```bash
 $ x = ![ls .]
 LICENSE    ascii_conch_part_transparent_tight.png  favicon.ico  tutorial.md
 README.md  default.css                             remote.html
@@ -300,7 +300,93 @@ $ x.alias
 ]
 ---
 # The Python-mode operator
-`@()`
+.left-column[
+
+ ## `@()`
+
+]
+.right-column[
+
+The `@()` operator allows us to insert Python variables and values into
+subprocess commands.
+
+`xonsh` can always mix and match subprocess and Python commands without additional syntax _if_ those commands are on separate lines, e.g.
+
+```bash
+$ for _ in range(2):
+°     echo "Hi!"
+°
+Hi!
+Hi!
+```
+
+But what about passing a variable to `echo` (or any other subprocess command?)
+
+```bash
+$ for i in range(2):
+°     echo i
+°
+i
+i
+```
+
+]
+---
+
+# The Python-mode operator
+.left-column[
+
+ ## `@()`
+
+]
+.right-column[
+
+The `@()` operator evaluates arbitrary Python expressions and returns the result
+as string. This result can be fed directly to a subprocess command:
+
+```bash
+$ for i in range(2):
+°     echo @(i)
+°
+0
+1
+```
+
+If the output is a non-string sequence (`list`, `set`, etc.) then the results
+are joined and returned as a string.
+
+```bash
+$ echo @([x for x in range(3)])
+0 1 2
+```
+
+]
+
+---
+
+# The Python-mode operator
+.left-column[
+
+ ## `@()`
+
+]
+.right-column[
+
+If the result of `@()` is in the first position it is treated as an alias:
+
+```bash
+$ @("echo hello there".split())
+hello there
+```
+
+(strings are not split automatically)
+
+```bash
+$ @("echo hello there")
+xonsh: subprocess mode: command not found: echo hello there
+```
+
+]
 ---
 # Globbing
 
