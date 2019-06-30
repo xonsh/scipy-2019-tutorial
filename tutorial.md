@@ -728,12 +728,139 @@ Pretty cool, huh?
 class: center, middle, inverse
 name: the-env
 # The Environment
+
+---
+# Environment
+
+All of `xonsh`'s environment variables live in `__xonsh__.env`.
+
+You can also access the environment using `${...}`.
+
+--
+
+You can use the membership operator to determine if an environment variable is
+present in your current session.
+
+```bash
+$ 'HOME' in ${...}
+True
+```
+
+--
+
+If you want more information about a certain environment variable in `xonsh`,
+you can ask for help!
+
+```bash
+$ ${...}.help("AUTO_CD")
+AUTO_CD:
+
+Flag to enable changing to a directory by entering the dirname or full path
+only (without the cd command).
+
+default: False
+configurable: True
+```
+
 ---
 # Typing & Detyping
+
+`xonsh` environment variables are Python objects. This means they also have
+types like Python objects. Sometimes these types are imposed based on a variable
+name.
+
+--
+
+Any env-var matching `\w*PATH` will be of type `EnvPath`, like
+
+* `PATH`
+* `LD_LIBRARY_PATH`
+* `RPATH`
+
+--
+
+Other variables are boolean, others are ints. Whatever their type, in `xonsh`
+you always have access to the true object, not a string representation.
+
+---
+# Detyping
+
+`xonsh` automatically converts variables to strings whenever it feeds them to
+subprocess commands.
+You can also explicitly request detyped variables:
+
+--
+
+```bash
+$ ${...}.get("PATH")
+EnvPath(
+['/opt/miniconda3/bin/',
+ '/usr/bin',
+ '/usr/local/bin',
+ '/usr/bin/vendor_perl/',
+ '/usr/bin/core_perl/']
+)
+```
+
+--
+
+```bash
+$ ${...}.detype().get("PATH")
+'/opt/miniconda3/bin/:/usr/bin:/usr/local/bin:/usr/bin/vendor_perl/:/usr/bin/core_perl/'
+```
+
 ---
 # Environment Swapping
+
+There are a couple of other useful methods on `${...}`, in particular, the
+`swap()` method is useful for temporarily setting environment variables.
+
+--
+
+```bash
+$ with ${...}.swap(SOMEVAR='foo'):
+°     echo $SOMEVAR
+°
+foo
+$ echo $SOMEVAR
+$SOMEVAR
+```
+
 ---
 # Exercises
+
+1. Try using `getpass.getpass()` with `swap()` to set your "password" in an environment variable temporarily.
+
+   <details><pre><code class="python">
+   $ import getpass
+   $ with ${...}.swap(PASS=getpass.getpass()):
+   °     echo @(f"git push https://gil:{$PASS}@github.com/xonsh/xonsh master")
+   °
+   Password:
+   git push https://gil:hunter2@github.com/xonsh/xonsh master
+
+   $ echo $PASS
+   $PASS
+   </code><pre></details>
+
+2. A `curl` binary in your `(conda|homebrew)` install is messing with your
+built-in package manager. It would be handy if you could remove the first entry
+of your `$PATH` but only to run the one install command...
+
+   <details><pre><code class="python">
+   $ echo $PATH
+   /opt/miniconda3/bin/:/usr/bin:/usr/local/bin:/usr/bin/vendor_perl/:/usr/bin/core_perl/
+   $ with ${...}.swap(PATH=$PATH[1:]):
+   °     echo "sudo pacman -S pinentry"
+   °     echo $PATH
+   °
+   sudo pacman -S pinentry
+   /usr/bin:/usr/local/bin:/usr/bin/vendor_perl/:/usr/bin/core_perl/
+
+   $ echo $PATH
+   /opt/miniconda3/bin/:/usr/bin:/usr/local/bin:/usr/bin/vendor_perl/:/usr/bin/core_perl/
+   </code><pre></details>
+
 ---
 class: center, middle, inverse
 name: callable-aliases
