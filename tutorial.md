@@ -32,7 +32,7 @@ $ pip install "xonsh[pygments,ptk,<linux|mac|win>]"
 .footnote[.red[*] Also, make sure you are on Python 3]
 ]
 ---
-layout: false
+name: startup-xonsh
 # Install & Setup
 
 .left-column[
@@ -40,28 +40,116 @@ layout: false
   ## Setup
 ]
 .right-column[
-Now to startup xonsh, simply
+Now to startup xonsh, simply run the xonsh command,
+
+```bashcon
+$ xonsh
+user@shell ~ $
+```
+
 ]
 ---
-# Sanity Checks
+# Install & Setup
+
+.left-column[
+  ## Install
+  ## Setup
+  ## Sanity Check
+]
+.right-column[
+Now to check that everything is working, run `xonfig`,
+
+```bashcon
+$ xontrib
++------------------+----------------------+
+| xonsh            | 0.9.6.dev33          |
+| Git SHA          | 626b94db             |
+| Commit Date      | Jun 28 17:20:28 2019 |
+| Python           | 3.7.3                |
+| PLY              | 3.11                 |
+| have readline    | True                 |
+| prompt toolkit   | 2.0.9                |
+| shell type       | prompt_toolkit2      |
+| pygments         | 2.4.2                |
+| on posix         | True                 |
+| on linux         | True                 |
+| distro           | ubuntu               |
+| on darwin        | False                |
+| on windows       | False                |
+| on cygwin        | False                |
+| on msys2         | False                |
+| is superuser     | False                |
+| default encoding | utf-8                |
+| xonsh encoding   | utf-8                |
+| encoding errors  | surrogateescape      |
++------------------+----------------------+
+```
+
+]
 ---
+class: center, middle
 # Questions?
 ---
 # Agenda
 
-1. Introduction
-2. Deep-dive
-3. ...
-
-[NOTE]: Note that you need active internet connection to access remark.js script file
+.bigger[
+1. [Xonsh Language Basics](#xonsh-lang-basics)
+2. [The Environment](#the-env)
+3. [Callable Aliases](#callable-aliases)
+4. [Events](#events)
+5. [Macros](#macros)
+6. [Advanced Confoguration](#adv-config)
+7. [Case Study](#case-study)
+]
 ---
 class: center, middle, inverse
-
+name: xonsh-lang-basics
 # Xonsh Language Basics
 ---
+name: xonsh-as-a-python-interpreter
 # Xonsh as a Python Interpreter
+.big[Xonsh is a superset Python 3.]
+
+--
+
+.big[Anything you can do in Python, you can also do in xonsh!]
+
+--
+
+.big[Including:
+
+* Adding numbers together
+* Opening Files
+* Importing modules
+* Defining functions & classes
+
+]
+
+--
+
+.big[Let's try a few of these out!]
 ---
 # Exercises
+At the command line,
+
+1. Compute the product of 2, 3, & 7.
+   <details><pre><code class="python">$ 2 * 3 * 7
+   42
+   </code><pre></details>
+2. Import NumPy (or `sys`, if you don't have NumPy installed)
+   <details><pre><code class="python">$ import numpy as np
+   $ np.arange(1, 6)
+   array([1, 2, 3, 4, 5])
+   </code><pre></details>
+3. Define an `add()` function, which adds two numbers together
+   and use it to sum together 2842 and 1400.
+   <details><pre><code class="python">$ def add(x, y):
+   .     return x + y
+   .
+   $ add(2842, 1400)
+   4242
+   </code><pre></details>
+
 ---
 # Xonsh as a Shell
 ---
@@ -487,6 +575,7 @@ Pretty cool, huh?
 # Questions
 ---
 class: center, middle, inverse
+name: the-env
 # The Environment
 ---
 # Typing & Detyping
@@ -496,6 +585,7 @@ class: center, middle, inverse
 # Exercises
 ---
 class: center, middle, inverse
+name: callable-aliases
 # Callable Aliases
 ---
 # Function signatures
@@ -508,6 +598,7 @@ class: center, middle, inverse
 # Break
 ---
 class: center, middle, inverse
+name: events
 # Events
 ---
 # Event Handlers
@@ -525,6 +616,7 @@ class: center, middle, inverse
 # Exercises
 ---
 class: center, middle, inverse
+name: macros
 # Macros
 ---
 # What is a Macro
@@ -538,6 +630,7 @@ class: center, middle, inverse
 # Exercises
 ---
 class: center, middle, inverse
+name: advanced-configuration
 # Advanced Configuration
 ---
 # xontribs
@@ -551,6 +644,7 @@ class: center, middle, inverse
 # Examples
 ---
 class: center, middle, inverse
+name: case-study
 # Case Study
 A Composable Machine Learning Tool
 ---

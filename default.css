@@ -4,6 +4,8 @@ a, a > code {
 }
 li p { line-height: 1.25em; }
 .red { color: #fa0000; }
+.big { font-size: 1.33em; }
+.bigger { font-size: 1.67em; }
 .large { font-size: 2em; }
 
 code {
