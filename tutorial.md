@@ -478,7 +478,62 @@ xonsh: subprocess mode: command not found: echo hello there
 ---
 # Globbing
 
-Glob ticks and regex ticks
+Regex ticks
+
+.left-column[
+
+ ## ` `` `
+]
+
+.right-column[
+
+Ready for super-charged file matching?
+
+You can wrap a regular expression in ` `` ` and it will return a list of
+matching files and directories.
+
+```bash
+$ `.*.md*`
+['README.md', 'tutorial.md']
+```
+
+The ticks are also a Python expression so you can use them in `for` loops, or
+list-comprehensions, or whatever floats your boat.
+
+```bash
+$ [f.lower() for f in `.*.md`]
+['readme.md', 'tutorial.md']
+```
+
+]
+
+---
+# Globbing
+
+Glob ticks
+
+.left-column[
+
+ ## ` `` `
+ ## ` g`` `
+]
+
+.right-column[
+
+If you prefer globs over regex, just prepend a `g` to your tick expression:
+
+```bash
+$ g`*.md`
+['README.md', 'tutorial.md']
+```
+
+Glob ticks also support recursive globbing with double `**`:
+
+```bash
+$ g`**/*.md`
+```
+
+]
 
 ---
 # `xonsh` string literals
