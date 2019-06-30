@@ -61,7 +61,7 @@ Now to check that everything is working, run `xonfig`,
 
 ```bashcon
 $ xontrib
-+------------------+----------------------+
++------------------|----------------------+
 | xonsh            | 0.9.6.dev33          |
 | Git SHA          | 626b94db             |
 | Commit Date      | Jun 28 17:20:28 2019 |
@@ -82,7 +82,7 @@ $ xontrib
 | default encoding | utf-8                |
 | xonsh encoding   | utf-8                |
 | encoding errors  | surrogateescape      |
-+------------------+----------------------+
++------------------|----------------------+
 ```
 
 ]
@@ -165,6 +165,8 @@ At the command line,
 ---
 # Exercises
 ---
+class: center, middle, inverse
+name: xonsh-lang-basics
 # Mixing Python and Subprocess Modes
 ---
 # Subprocess operators
@@ -178,7 +180,14 @@ At the command line,
   ## `$()`
 ]
 .right-column[
+
 `$()` captures the standard output of a command and returns it as a string.
+
+]
+
+--
+
+.right-column[
 
 ```bash
 $ x = $(ls)
@@ -193,6 +202,7 @@ favicon.ico
 remote.html
 tutorial.md
 ```
+
 ]
 
 
@@ -203,7 +213,14 @@ tutorial.md
   ## `$()`
 ]
 .right-column[
+
 And it really is a `str` with all the methods you would expect:
+
+]
+
+--
+
+.right-column[
 
 ```bash
 $ x.upper()
@@ -234,6 +251,12 @@ $ x.split("\n")
 Beyond the output, `!()` offers the return code, process id, `stderr` and
 `stdout` streams, whether the `cmd` is an alias, timestamps, and more!
 
+]
+
+--
+
+.right-column[
+
 ```bash
 $ x = !(ls)
 $ x
@@ -258,8 +281,15 @@ tutorial.md
   ## `!()`
 ]
 .right-column[
+
 `!()` returns an instance of a `CommandPipeline` object -- this object is
 "truthy" if the command completed successfully:
+
+]
+
+--
+
+.right-column[
 
 ```bash
 $ bool(!(ls .))
@@ -306,9 +336,10 @@ $ for i, loc in enumerate(!(ls)):
   ## `$[]`
 ]
 .right-column[
-`$[]` and `![]` are the uncaptured subprocess expressions. They are very
-similar to `$()` and `!()` with the notable difference that they stream output
-to `stdout`.
+
+`$[]` and `![]` are the uncaptured subprocess expressions. They are very similar
+to `$()` and `!()` with the notable difference that they stream output to
+`stdout`.
 
 ]
 
@@ -324,6 +355,7 @@ to `stdout`.
 `$[]` always returns `None`.
 
 You may be asking, what is this even for?
+
 More on that later, but the short answer is that it allows you to force `xonsh`
 to recognize a command as a subprocess command if the context is ambiguous.
 
@@ -351,15 +383,21 @@ README.md  default.css
 $ x = ![ls .]
 LICENSE    ascii_conch_part_transparent_tight.png  favicon.ico  tutorial.md
 README.md  default.css                             remote.html
+```
+
+]
+
+--
+
+.right-column[
+
+```bash
 $ x.args
 ['ls', '.']
-
 $ x.timestamps
 [1561759961.047233, 1561759961.0570006]
-
 $ x.alias
 ['ls', '--color=auto', '-v']
-
 ```
 
 ]
@@ -372,16 +410,18 @@ $ x.alias
   ## `!()`
   ## `$[]`
   ## `![]`
-  ##
+  ## &nbsp;
 
 ]
 .right-column[
-
-<br>
-
+<br/>
 ## "Curly Captures"
+]
 
-<br><br>
+--
+
+
+.right-column[
 
 ## "Square Streams"
 
@@ -393,12 +433,17 @@ $ x.alias
  ## `@()`
 
 ]
+--
 .right-column[
 
 The `@()` operator allows us to insert Python variables and values into
 subprocess commands.
 
-`xonsh` can always mix and match subprocess and Python commands without additional syntax _if_ those commands are on separate lines, e.g.
+`xonsh` can always mix and match subprocess and Python commands without
+additional syntax _if_ those commands are on separate lines, e.g.
+]
+--
+.right-column[
 
 ```bash
 $ for _ in range(2):
@@ -407,8 +452,20 @@ $ for _ in range(2):
 Hi!
 Hi!
 ```
+]
+---
+# The Python-mode operator
+.left-column[
+
+ ## `@()`
+
+]
+.right-column[
 
 But what about passing a variable to `echo` (or any other subprocess command?)
+]
+--
+.right-column[
 
 ```bash
 $ for i in range(2):
@@ -431,6 +488,9 @@ i
 
 The `@()` operator evaluates arbitrary Python expressions and returns the result
 as string. This result can be fed directly to a subprocess command:
+]
+--
+.right-column-tight[
 
 ```bash
 $ for i in range(2):
@@ -439,6 +499,9 @@ $ for i in range(2):
 0
 1
 ```
+]
+--
+.right-column-tight[
 
 If the output is a non-string sequence (`list`, `set`, etc.) then the results
 are joined and returned as a string.
@@ -461,11 +524,17 @@ $ echo @([x for x in range(3)])
 .right-column[
 
 If the result of `@()` is in the first position it is treated as an alias:
+]
+--
+.right-column-tight[
 
 ```bash
 $ @("echo hello there".split())
 hello there
 ```
+]
+--
+.right-column-tight[
 
 (strings are not split automatically)
 
@@ -476,9 +545,7 @@ xonsh: subprocess mode: command not found: echo hello there
 
 ]
 ---
-# Globbing
-
-Regex ticks
+# Regex ticks
 
 .left-column[
 
@@ -488,14 +555,23 @@ Regex ticks
 .right-column[
 
 Ready for super-charged file matching?
+]
+--
+.right-column-tight[
 
 You can wrap a regular expression in ` `` ` and it will return a list of
 matching files and directories.
+]
+--
+.right-column-tight[
 
 ```bash
 $ `.*.md*`
 ['README.md', 'tutorial.md']
 ```
+]
+--
+.right-column-tight[
 
 The ticks are also a Python expression so you can use them in `for` loops, or
 list-comprehensions, or whatever floats your boat.
@@ -508,9 +584,7 @@ $ [f.lower() for f in `.*.md`]
 ]
 
 ---
-# Globbing
-
-Glob ticks
+# Glob ticks
 
 .left-column[
 
@@ -526,6 +600,9 @@ If you prefer globs over regex, just prepend a `g` to your tick expression:
 $ g`*.md`
 ['README.md', 'tutorial.md']
 ```
+]
+--
+.right-column-tight[
 
 Glob ticks also support recursive globbing with double `**`:
 
@@ -546,12 +623,18 @@ $ g`**/*.md`
 .right-column[
 
 f-strings, or formatted string literals, are a part of Python 3.6+ and they are _great_.
+]
+--
+.right-column-tight[
 
 ```bash
 $ x = 5
 $ print(f"x is {x}")
 x is 5
 ```
+]
+--
+.right-column-tight[
 
 `xonsh` supports f-strings (so long as your underlying Python is 3.6+) and it
 also has a few _extra_ tricks up its sleeves!
@@ -570,6 +653,9 @@ also has a few _extra_ tricks up its sleeves!
 
 p-strings are a `xonsh` feature that allow easy construction of `pathlib.Path`s.
 Any string that has a leading `p` becomes a `Path`.
+]
+--
+.right-column-tight[
 
 ```bash
 $ path = p"my_cool_folder"
@@ -578,6 +664,9 @@ PosixPath('my_cool_folder')
 $ path.exists()
 False
 ```
+]
+--
+.right-column-tight[
 
 If you haven't used `pathlib` before, take a moment to look through all of the
 `Path` attributes and methods -- they're super useful!
@@ -601,8 +690,9 @@ Also try out using the `/` operator with a `pathlib.Path`.
 
 There are p-strings and f-strings, which leads to a natural question -- what
 about pf-strings?
-
-Yup, we have those, too!
+]
+--
+.right-column-tight[
 
 ```bash
 $ home = "home"
@@ -612,8 +702,14 @@ $ p = pf"/{home}/{user}/{gitdir}"
 $ p
 PosixPath('/home/gil/github.com')
 ```
+]
+--
+.right-column-tight[
 
 But wait! Environment variables are also Python objects:
+]
+--
+.right-column-tight[
 
 ```bash
 $ p = pf"{$HOME}/{gitdir}"

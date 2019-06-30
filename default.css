@@ -45,6 +45,10 @@ code {
   float: right;
   padding-top: 1em;
 }
+.right-column-tight {
+    width: 75%;
+    float: right;
+}
 .pull-left {
   float: left;
   width: 47%;
