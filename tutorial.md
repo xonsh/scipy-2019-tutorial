@@ -152,6 +152,7 @@ At the command line,
 
 ---
 # Xonsh as a Shell
+
 ---
 # Running Commands
 ---
