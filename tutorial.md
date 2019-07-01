@@ -178,8 +178,121 @@ and we have one simple rule:]
 
 ---
 # Running Commands
+
+.big[The purpose of a shell, of course, is to run commands!]
+
+--
+
+```bashcon
+# a simple echo
+$ echo "Shello, World!"
+Shello, World!
+
+# create a file in a new directory
+$ mkdir -p snail
+$ cd snail
+$ touch deal-with-it.txt
+$ ls
+deal-with-it.txt
+
+# simple piping example
+$ echo "Wow Mom!" | grep o
+Wow Mom!
+```
+
+--
+
+.big[Under the covers, xonsh is using Python's `subprocess` module.]
+
 ---
 # Environment Variables
+
+Environment variables are written as a `$` followed by a name.
+
+```bashcon
+$ $HOME
+'/home/it-me'
+```
+
+--
+
+You can set (and export) environment variables with normal Python syntax:
+
+```pythoncon
+$ $GOAL = "don't panic"
+$ print($GOAL)
+don't panic
+$ del $GOAL
+```
+
+--
+
+Coming from Python, these should look and feel like any other variable,
+except that they live in the environment.
+
+---
+# Environment Lookup with `${expr}`
+
+Sometimes you might not know the name of the environment variable,
+or you might want to compute the name programatically, or maybe it
+has special characters in it.
+
+--
+
+In these cases, xonsh provides the `${expr}` syntax.
+
+--
+
+This lets you use a Python expression to lookup the value of the
+environment variable.
+
+--
+
+```pythoncon
+$ x = "USER"
+$ ${x}
+'it-me'
+$ ${"HO" + "ME"}
+'/home/it-me'
+```
+
+--
+
+.red[**Warning!**] In sh-langs, `$NAME` and `${NAME}` mean the same thing.
+In xonsh, they have distinct meanings.
+
+---
+# The Environment Itself `${...}`
+
+If you ever need access to the environment object, you can grab it by
+passing in an elipssis as the lookup expression, i.e. `${...}`.
+
+--
+
+```python
+$ ${...}
+xonsh.environ.Env(
+{'AUTO_CD': False,
+ 'AUTO_PUSHD': False,
+ 'AUTO_SUGGEST': True,
+ 'AUTO_SUGGEST_IN_COMPLETIONS': False,
+ 'BASH_COMPLETIONS': EnvPath(
+['/usr/share/bash-completion/bash_completion']
+),
+ 'BASH_COMPLETION_USER_DIR': '/home/scopatz/miniconda/share/bash-completion',
+ 'BOTTOM_TOOLBAR': '',
+ ...
+})
+```
+
+--
+
+This is a reference to the object that lives at `__xonsh__.env`.
+
+--
+
+We'll see more of this in a bit.
+
 ---
 # The `source` command
 ---
