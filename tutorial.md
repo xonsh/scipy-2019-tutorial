@@ -295,8 +295,84 @@ We'll see more of this in a bit.
 
 ---
 # The `source` command
+
+The `source` command:
+
+1. Reads in the contents of a file,
+2. Executes it, and
+3. Brings all global variables into the current execution context.
+
+--
+
+**example.xsh**:
+
+```python
+$EMAIL = "snail@xon.sh"
+
+password = "swordfish"
+
+def combine():
+    return $EMAIL + ":" + password
+```
+
+--
+
+Running this:
+
+```bashcon
+$ source example.xsh
+$ combine()
+'snail@xon.sh:swordfish'
+```
+
+As Python, you could also `import example`, with the normal Python rules.
+
+???
+
+Context is tied correctly
+
+```bash
+$ password = "monkey"
+$ combine()
+'snail@xon.sh:monkey'
+```
+
 ---
 # `source-foreign`
+
+Unlike other languages, xonsh enables you to source scripts written in
+shells other than xonsh (or Python).
+
+--
+
+The most common of these is Bash.
+
+**example.sh**
+
+```bash
+export WAKKA="jawaka"
+
+function now_playing {
+  echo "$(whoami) on drums!"
+}
+```
+
+--
+
+Running this with `source-foreign bash` or the `source-bash` shortcut:
+
+```bashcon
+$ source-bash example.sh
+$ $WAKKA
+'jawaka'
+$ now_playing
+it-me on drums!
+```
+
+--
+
+Also stock support for `source-zsh` and `source-cmd`!
+
 ---
 # The `xonshrc` configuation file
 ---
