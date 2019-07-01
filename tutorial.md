@@ -152,6 +152,29 @@ At the command line,
 
 ---
 # Xonsh as a Shell
+.big[Xonsh is also a **shell language**.]
+
+--
+
+.big[More exactly, xonsh is a **scripting language** that is *mostly*
+compatible with [Unix sh-lang](https://en.wikipedia.org/wiki/Bourne_shell).red[*].]
+
+.footnote[.red[*] If you don't know `sh`, don't worry! The point of
+xonsh is to replace the hard-to-learn, hard-to-remember bits of `sh`
+with Python.]
+
+--
+
+> .big["Why isn't xonsh also a sh-lang superset?"]
+
+--
+
+.big[It is impossible to be both a Python superset **and** a `sh` superset,
+and we have one simple rule:]
+
+--
+
+.center[.bigger[**Python always wins!**]]
 
 ---
 # Running Commands
