@@ -646,7 +646,7 @@ README.md  default.css
   ## `$[]`
   ## `![]`
 ]
-.right-column[
+.right-column-tight[
 `![]` streams command output to `stdout` but also returns an instance of a `HiddenCommandPipeline` object.
 
 ```bash
@@ -659,7 +659,7 @@ README.md  default.css                             remote.html
 
 --
 
-.right-column[
+.right-column-tight[
 
 ```bash
 $ x.args
@@ -669,6 +669,24 @@ $ x.timestamps
 $ x.alias
 ['ls', '--color=auto', '-v']
 ```
+
+]
+
+---
+# Uncaptured subprocesses exercises
+
+.left-column[
+  ## `$()`
+  ## `!()`
+  ## `$[]`
+  ## `![]`
+]
+.right-column-tight[
+
+Take a few minutes to try out each of the subprocess operators.
+
+Use xonsh's tab completion to explore the attributes of the `CommandPipeline`s
+and get a sense of what information is in there.
 
 ]
 
