@@ -1241,9 +1241,125 @@ too much company!
 ```
 
 ---
-# Adding to pipelines
+# Function signatures: Fourtified
+
+Standard streams are also able to be passed in as keyword
+arguments whose defaults are `None`.
+
+--
+
+These are file open objects with all of the usual Python interfaces.
+
+--
+
+```python
+def _grape(args, stdin=None, stdout=None, stderr=None):
+    for line in stdin:
+        stdout.write("Grape says '" + line.strip().lower() + "'\n")
+    return 0
+
+aliases["grape"] = _grape
+```
+
+--
+
+<u>usage</u>:
+
+```bash
+$ echo WrATh | grape
+Grape says 'wrath'
+```
+
+--
+
+Note that not all streams must be passes in, but the prior streams must
+be passed in if the latter ones are. For example, if you want to use
+`stdout` you have to accept `stdin` but not `stderr`.
+
+---
+# Function signatures: A Kiwious Spectacle
+
+The command specification `spec` is available as the next keyword argument.
+
+--
+
+This is [a rich Python object](https://xon.sh/api/built_ins.html#xonsh.built_ins.SubprocSpec)
+that represents the metadata about the callable alias that is running.
+
+--
+
+For example, if the alias wants to add a newline if it is uncaptured,
+but ignore the newline otherwise, you need the `captured` attr of the spec.
+
+```python
+def _kiwi(args, stdin=None, stdout=None, stderr=None, spec=None):
+    import xonsh.proc
+    if spec.captured in xonsh.proc.STDOUT_CAPTURE_KINDS:
+        end = ''
+    else:
+        end = ' (newline)\n'
+    print('Hi Mom!', end=end)
+aliases["kiwi"] = _kiwi
+```
+
+--
+
+
+```bash
+$ kiwi  # uncaptured
+Hi Mom! (newline)
+
+
+$ $(kiwi)  # captured
+'Hi Mom!'
+```
+
+---
+# Function signatures: Framed!
+
+The final form takes a `stack` argument as well.
+
+--
+
+This is a list of [`FrameInfo`](https://docs.python.org/3/library/inspect.html#the-interpreter-stack)
+instances, and is for the truly maniacal.
+
+--
+
+The `stack` argument provides all the alias with everything it could possible
+want to know about its call site.
+
+--
+
+```python
+def lemon(args, stdin=None, stdout=None, stderr=None, spec=None, stack=None):
+    for frame_info in stack:
+        frame = frame_info[0]
+        print('In function ' + frame_info[3])
+        print('  locals', frame.f_locals)
+        print('  globals', frame.f_globals)
+        print('\n')
+    return 0
+```
+
+--
+
+.center[.bigger[Please `stack` responsibly]]
+
 ---
 # Exercises
+
+1. Write a callable alias `frankenstein`, which provides the
+   content of Mary Shelley's classic novel,
+   [full text here](https://www.gutenberg.org/files/84/84-0.txt).
+3. Write a callable alias `upper`, that uppercases what it reads on stdin.
+2. Write a callable alias `words`, that returns all of the unique, sorted
+   words coming from stdin.
+4. Write a callable alias `count`, that returns the number of tokens read
+   from stdin.
+5. Combine the above aliases in a single pipeline to count the number of words
+   in "Frankenstein."
+
 ---
 class: center, middle, inverse
 # Break
