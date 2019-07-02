@@ -1413,11 +1413,189 @@ class: center, middle, inverse
 name: macros
 # Macros
 ---
+name: what-is-a-macro
 # What is a Macro
+
+.big[A **macro** is syntax that replaces a smaller amount of code with a
+larger expression, syntax tree, code object, etc. after the macro has been evaluated.]
+
 ---
-# Function Macros
+name: what-is-a-macro1
+template: what-is-a-macro
+
+.big[<u>The macro algorithm</u>:]
+---
+template: what-is-a-macro1
+.big[
+1. Pause or skip normal parsing
+]
+---
+template: what-is-a-macro1
+.big[
+1. Pause or skip normal parsing
+2. Gather macro inputs as strings
+]
+---
+template: what-is-a-macro1
+.big[
+1. Pause or skip normal parsing
+2. Gather macro inputs as strings
+3. Evaluate macro with inputs
+]
+---
+template: what-is-a-macro1
+.big[
+1. Pause or skip normal parsing
+2. Gather macro inputs as strings
+3. Evaluate macro with inputs
+4. Resume normal parsing and execution.
+]
+--
+
+.big[Xonsh's macro system is more like Rust's than those in C, C++, Fortran,
+Lisp, Forth, Julia, etc.]
+
+--
+
+.big[If these seem scary, Jupyter magics `%` and `%%` are macros! 🧙]
+
+---
+# What is a Macro
+
+.big[Macros use a special `!` syntax. (Rust never sleeps, after all.)]
+
+--
+
+.big[There are three types of macro syntax in xonsh.]
+
+--
+
+<br/>
+
+.bigger.center[**Subprocess Macros**]
+
+--
+
+<br/>
+
+.bigger.center[**Function Macros**]
+
+--
+
+<br/>
+
+.bigger.center[**Context Macros**]
+
 ---
 # Subprocess Macros
+
+Subprocess macros turn everything after an `!` in a subprocess call into
+a single string argument that is passed into the command.
+
+--
+
+A simple example:
+
+```bash
+$ echo! I'm Mr. Meeseeks.
+I'm Mr. Meeseeks.
+```
+
+--
+
+Xonsh will split on whitespace,
+so each argument is passed in separately.
+
+```bash
+$ echo x  y       z
+x y z
+```
+
+--
+
+Space can be preserved with quotes, but that can be annoying.
+
+```bash
+$ echo "x  y       z"
+x  y       z
+```
+
+--
+
+Subprocess macros will pause and then strip
+all input after `!`.
+
+```bash
+$ echo! x  y       z
+x  y       z
+```
+
+---
+# Subprocess Macros
+
+Macros pause *all* syntax, even fancy xonsh bits like environment
+variables.
+
+--
+
+For example, without macros, environment variable are expanded:
+
+```bash
+$ echo $USER
+it-me
+```
+
+Inside of a macro, all parsing is turned off.
+
+```bash
+$ echo! $USER
+$USER
+```
+
+--
+
+You can put the `!` anywhere in the subprocess:
+
+```bash
+$ echo I am $USER ! and I still live at $HOME
+I am it-me and I still live at $HOME
+```
+
+---
+# Subprocess Macros
+
+This is particularly useful whenever you need to write code as
+string and hand that source off to a command.
+
+--
+
+**timeit**:
+
+```bash
+$ timeit! "hello mom " + "and dad"
+100000000 loops, best of 3: 8.24 ns per loop
+```
+
+--
+
+**bash** (for shame!):
+
+```bash
+$ bash -c ! export var=42; echo $var
+42
+```
+
+--
+
+**python** (yay 🎉):
+
+```bash
+$ python -c ! import os; print(os.path.abspath("/"))
+/
+```
+
+---
+# Function Macros
 ---
 # Context Macros
 ---
