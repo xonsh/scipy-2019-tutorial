@@ -291,7 +291,12 @@ This is a reference to the object that lives at `__xonsh__.env`.
 
 --
 
-We'll see more of this in a bit.
+You can use this object to test if a variable exists:
+
+```bash
+$ "PATH" in ${...}
+True
+```
 
 ---
 # The `source` command
@@ -375,8 +380,60 @@ Also stock support for `source-zsh` and `source-cmd`!
 
 ---
 # The `xonshrc` configuation file
+
+.big[Xonsh's main config file is located at `~/.xonshrc`.]
+
+--
+
+.big[This is just a special `*.xsh` file that is loaded up before
+almost anything else.]
+
+--
+
+.big[This is where your customizations go, and it is often used to
+set environment variables.]
+
+--
+
+**~/.xonshrc**
+
+```bash
+$MULTILINE_PROMPT = '`·.,¸,.·*¯`·.,¸,.·*¯'
+$XONSH_SHOW_TRACEBACK = True
+```
+
+--
+
+.big[A complete listing of environment variables that xonsh knows about
+is available at [https://xon.sh/envvars.html](https://xon.sh/envvars.html)]
+
 ---
 # Exercises
+
+1. Set a random integer to the environment variable `$SECRET`.
+   <details><pre><code class="python">import random
+   $SECRET = random.randint(1, 42)
+   </code><pre></details>
+2. Print the secret value after the phrase `My secret value is:`
+   <details><pre><code class="python"># Solution 1
+   $ echo "My secret value is $SECRET"
+
+   # Solution 2
+   $ print("My secret value is", $SECRET)
+   </code><pre></details>
+3. In your xonshrc, generate a secret value. Print this value
+   when xonsh starts up if another `$SAFE` environment variable
+   does not exist.
+   <details>
+   <b>~/.xonshrc</b>
+
+   <pre><code class="python">import random
+   $SECRET = random.randint(1, 42)
+   if "SAFE" not in ${...}:
+       echo "My secret value is $SECRET"
+   </code><pre></details>
+
+
 ---
 class: center, middle, inverse
 name: xonsh-lang-basics
