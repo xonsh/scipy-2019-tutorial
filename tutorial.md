@@ -1136,7 +1136,110 @@ class: center, middle, inverse
 name: callable-aliases
 # Callable Aliases
 ---
-# Function signatures
+# Callable Aliases
+
+.big[We've now seen how to exchange code between Python and subprocess mode.]
+
+--
+
+.big[But that's boring 💤💤💤]
+
+--
+
+.big[Let's fully integrate Python into a data-processing pipeline by
+allowing functions (callables) to be executed in subprocess mode...]
+
+--
+
+.big[...just like any other command!]
+
+<div style="text-align:center;">
+<img src="large_surfin_turtle__24434.1458626022.webp" style="width:200px;"/>
+</div>
+
+---
+# Callable Aliases
+
+.big[This works for any Python function that adheres to a certain set of
+known signatures. (So not *any* function.)]
+
+--
+
+.big[These are known as **callable aliases** because they are often placed
+in the builtin `aliases` dictionary, along side the more normal aliases.]
+
+--
+
+.big[By placing them in `aliases`, they are executable from anywhere, as with
+normal subproess commands and aliases.]
+
+---
+# Function signatures: Nothing!
+
+In the simplest case, the alias takes no arguments and returns a string
+or an integer return code.
+
+--
+
+```python
+$ aliases['banana'] = lambda: "Banana for scale.\n"
+$ banana
+Banana for scale.
+```
+
+--
+
+We can pipe this to a normal command:
+
+```bashcon
+$ banana | wc -w
+3
+```
+
+--
+
+And if we want to destoy the alias:
+
+```python
+$ del aliases['banana']
+```
+
+---
+# Function signatures: The Loneliest
+
+Callable aliases may also optionally take command-line options
+as the first positional argument.
+
+--
+
+These come in as a list of strings, like `sys.argv`.
+
+--
+
+```python
+def apple(args):
+    if len(args) == 1:
+        print("all alone with " + args[0])
+        return 0
+    else:
+        print("too much company!\n- " + "\n- ".join(args))
+        return 1
+```
+
+--
+
+The callable alias just needs to be the first element of a command:
+
+```bash
+$ @(apple) core
+all alone with core
+
+$ @(apple) core seed
+too much company!
+- core
+- seed
+```
+
 ---
 # Adding to pipelines
 ---
