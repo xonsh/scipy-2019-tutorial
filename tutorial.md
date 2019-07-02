@@ -1352,13 +1352,40 @@ def lemon(args, stdin=None, stdout=None, stderr=None, spec=None, stack=None):
 1. Write a callable alias `frankenstein`, which provides the
    content of Mary Shelley's classic novel,
    [full text here](https://www.gutenberg.org/files/84/84-0.txt).
+   <details><pre><code class="python"># short version
+   aliases["frankenstein"] = lambda: $(curl https://www.gutenberg.org/files/84/84-0.txt)
+
+   # streaming version
+   def _frankenstein(args, stdin=None, stdout=None):
+      for line in !(curl https://www.gutenberg.org/files/84/84-0.txt):
+         stdout.write(line)
+
+   aliases["frankenstein"] = _frankenstein
+   </code></pre></details>
 3. Write a callable alias `upper`, that uppercases what it reads on stdin.
+   <details><pre><code class="python"># short version
+   aliases["upper"] = lambda args, stdin: stdin.read().upper()
+
+   # streaming version
+   def _upper(args, stdin=None, stdout=None):
+      for line in stdin:
+         stdout.write(line.upper())
+
+   aliases["upper"] = _upper
+   </code></pre></details>
 2. Write a callable alias `words`, that returns all of the unique, sorted
    words coming from stdin.
+   <details><pre><code class="python">aliases["words"] = lambda args, stdin: "\n".join(sorted(set(stdin.read().split())))
+   </code></pre></details>
 4. Write a callable alias `count`, that returns the number of tokens read
    from stdin.
+   <details><pre><code class="python">aliases["count"] = lambda args, stdin: str(len(stdin.read().split())) + "\n"
+   </code></pre></details>
 5. Combine the above aliases in a single pipeline to count the number of words
    in "Frankenstein."
+   <details><pre><code class="bash">$ frankenstein | upper | words | count
+   11724
+   </code></pre></details>
 
 ---
 class: center, middle, inverse
