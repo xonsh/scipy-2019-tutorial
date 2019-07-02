@@ -265,7 +265,7 @@ In xonsh, they have distinct meanings.
 # The Environment Itself `${...}`
 
 If you ever need access to the environment object, you can grab it by
-passing in an elipssis as the lookup expression, i.e. `${...}`.
+passing in an ellipsis as the lookup expression, i.e. `${...}`.
 
 --
 
@@ -1010,6 +1010,9 @@ Pretty cool, huh?
 
 ---
 # Exercises
+
+
+
 ---
 # Questions
 ---
@@ -1362,10 +1365,10 @@ def lemon(args, stdin=None, stdout=None, stderr=None, spec=None, stack=None):
 
 --
 
-.center[.bigger[Please `stack` responsibly]]
+.center[.bigger[Please `stack` Exercises]]
 
 ---
-# Exercises
+# responsibly
 
 1. Write a callable alias `frankenstein`, which provides the
    content of Mary Shelley's classic novel,
@@ -1409,21 +1412,191 @@ def lemon(args, stdin=None, stdout=None, stderr=None, spec=None, stack=None):
 class: center, middle, inverse
 # Break
 ---
+
 class: center, middle, inverse
 name: events
 # Events
+
 ---
 # Event Handlers
+
+Yay for events!  An event is an... event?
+
+An event is a trigger that can `fire` at predefined points in code.
+
+`xonsh` has a simple, but powerful, event system that you can use to peek inside
+of existing programs or to add more functionality to your own.
+
+--
+
+An event `handler` is a function that is called whenever a given event is
+`fired`. An event can have multiple handlers -- that is, you can run arbitrarily
+many functions that are all triggered by a single event firing.
+
+Let's look at an example!
+
 ---
-# Event Managment
+# `events.on_chdir`
+
+There are several events that are already registered with `xonsh` (we'll cover
+how to add _new_ events in a little bit).
+
+`events.on_chdir` fires every time we... change directory. Because this event
+already exists, all we want to do is to register a `handler` to listen for the
+event and then execute.
+
+--
+
+```bash
+$ @events.on_chdir
+° def chdir_handler(olddir, newdir):
+°     print(f"The directory changed from {olddir} to {newdir}!")
+°
+```
+
+--
+
+```bash
+$ cd ..
+The directory changed from /home/gil/github.com/xonsh/scipy-2019-tutorial to /home/gil/github.com/xonsh!
+$ cd scipy-2019-tutorial/
+The directory changed from /home/gil/github.com/xonsh to /home/gil/github.com/xonsh/scipy-2019-tutorial!
+```
+
 ---
-# Registration
+# Event Management
+
+Um... how do I make this stop?
+
+That was a pretty verbose event handler we created.  Let's turn it off.
+
+Each event has an associated `set` of `handlers`. The simplest way to remove a
+handler is to `pop` it off.
+
+```bash
+$ events.on_chdir.pop()
+<function __main__.chdir_handler>
+```
+
+Now that we can move around without the shell yelling at us, let's look at that
+example in-depth.
+
+---
+# Handler Registration
+
+You can register a handler by decorating a function with the event object:
+
+```bash
+$ @events.on_chdir
+° def chdir_handler(olddir, newdir):
+°     print(f"The directory changed from {olddir} to {newdir}!")
+```
+
+Note that `olddir` and `newdir` weren't specified by us - they're supplied by
+the event itself.
+
+--
+
+Not all events provide arguments to their handlers -- you can check by calling
+`help(event.name)`, although that's overly verbose.
+
+For now, it's simpler to print the `__doc__` directly:
+
+```bash
+$ print(events.on_chdir.__doc__)
+
+on_chdir(olddir: str, newdir: str) -> None
+
+Fires when the current directory is changed for any reason.
+```
+
+The type-hint-esque signature tells us which variable names to expect and their
+types. (If you don't want to deal with them, you can capture them using `**kwargs`)
+
 ---
 # When events are fired
+
+Some events are fired because `xonsh` has them set up to `fire` already. Others
+`fire` when you tell them to. Many event names are self-descriptive, but if
+there's any ambiguity, you can always check the `__doc__`.
+
+You can also look at the list of events in the [docs](https://xon.sh/events.html)
+
+Let's walk through defining our own event, setting it to fire, then set up a
+handler to react to it.
+
 ---
-# Transmogrify: Normal events vs Load events
+# Example Event
+
+First we have to create the new event. Believe it or not, to create an event,
+you create a docstring for the event. This is truly self-documenting code.
+
+Let's create an event that raises an alarm if it's called. This is our first
+event, so we won't add in any `kwargs`:
+
+--
+
+```bash
+$ events.doc("never_run_this", """
+° never_run_this() -> None
+°
+° Fired when forbidden functions are run.
+° """)
+```
+
+--
+
+Now write a function that `fires` the event. This function could do a bunch of
+other stuff, but for this example we'll keep it simple:
+
+--
+
+```bash
+$ def delete_my_computer():
+°     events.never_run_this.fire()
+°
+```
+
+Now run `delete_my_computer`.  What happened?
+
+--
+
+Nothing.
+
 ---
-# Example Events
+# Example Event continued
+
+Not nothing, truly. The event _did_ fire, we just weren't listening. What do we
+need to add?
+
+--
+
+A handler!
+
+--
+
+Something suitably chastening -- this person did just delete your computer, after all.
+
+--
+
+```bash
+$ @events.never_run_this
+° def WHO_DID_IT():
+°     print(f"omg user {$(whoami)} just DELETED YOUR COMPUTER")
+```
+
+--
+
+Now, go ahead and delete your computer again:
+
+--
+
+```bash
+$ delete_my_computer()
+omg user gil
+ just DELETED YOUR COMPUTER
+```
+
 ---
 # Exercises
 ---
