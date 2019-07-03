@@ -1596,10 +1596,363 @@ $ python -c ! import os; print(os.path.abspath("/"))
 
 ---
 # Function Macros
+
+Xonsh supports Rust-like macros that are based on normal Python callables.
+
+--
+
+Macros do not require a special definition in xonsh.
+
+--
+
+However, they must be called with `!` between the callable and
+the opening parentheses `(`.
+
+--
+
+Macro arguments are split on the top-level commas `,`.
+
+--
+
+For example functions `f` and `g`:
+
+```python
+# No macro args
+f!()
+
+# Single arg
+f!(x)
+g!([y, 43, 44])
+
+# Two args
+f!(x, x + 42)
+g!([y, 43, 44], f!(z))
+```
+
+---
+# Function Macros
+
+.big[What actually happens to the arguments depends on the function definition.]
+
+--
+
+.big[Arguments in the macro call are matched up with the corresponding parameter
+annotation in the callable’s signature.]
+
+--
+
+.big[For example:]
+
+```python
+def identity(x : str):
+    return x
+```
+
+--
+
+.big[Calling this normally in Python will just return the same object we put in,
+even if it is not a string!]
+
+---
+# Function Macros
+
+.big[<u>Normal Python Call</u>:]
+
+```python
+>>> identity('me')
+'me'
+
+>>> identity(42)
+42
+
+>>> identity(identity)
+<function __main__.identity>
+```
+
+.big[<u>Xonsh Macro Call</u>:]
+
+```python
+>>> identity!('me')
+"'me'"
+
+>>> identity!(42)
+'42'
+
+>>> identity!(identity)
+'identity'
+```
+
+---
+# Function Macros
+
+.big[Each macro argument is stripped prior to passing it to the macro.]
+
+--
+
+.big[This is done for consistency.]
+
+--
+
+```python
+>>> identity!(42)
+'42'
+
+>>> identity!(  42 )
+'42'
+```
+
+--
+
+<div style="text-align:center;">
+<img src="doge-digi-wider-lte.png" style="width:300px;"/>
+</div>
+
+---
+# Function Macros
+
+.bigger[Some truly nefarious examples:]
+
+```python
+>>> identity!(import os)
+'import os'
+
+>>> identity!(if True:
+...     pass)
+'if True:\n    pass'
+
+>>> identity!(std::vector<std::string> x = {"yoo", "hoo"})
+'std::vector<std::string> x = {"yoo", "hoo"}'
+```
+
+---
+# Function Macros Annotations
+
+<table class="docutils align-default" id="id2">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Flags</p></th>
+<th class="head"><p>Modes</p></th>
+<th class="head"><p>Returns</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>String</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'s'</span></code>, <code class="docutils literal notranslate"><span class="pre">'str'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'string'</span></code></p></td>
+<td></td>
+<td><p>Source code of argument as string, <em>default</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ast.AST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'a'</span></code> or <code class="docutils literal notranslate"><span class="pre">'ast'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'eval'</span></code> (default), <code class="docutils literal notranslate"><span class="pre">'exec'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'single'</span></code></p></td>
+<td><p>Abstract syntax tree of argument.</p></td>
+</tr>
+<tr class="row-even"><td><p>Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">types.CodeType</span></code> or <code class="docutils literal notranslate"><span class="pre">compile</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'c'</span></code>, <code class="docutils literal notranslate"><span class="pre">'code'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'compile'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'eval'</span></code> (default), <code class="docutils literal notranslate"><span class="pre">'exec'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'single'</span></code></p></td>
+<td><p>Compiled code object of argument.</p></td>
+</tr>
+</tbody>
+</table>
+---
+# Function Macros Annotations
+
+<table class="docutils align-default" id="id2">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Flags</p></th>
+<th class="head"><p>Modes</p></th>
+<th class="head"><p>Returns</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>Eval</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eval</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'v'</span></code> or <code class="docutils literal notranslate"><span class="pre">'eval'</span></code></p></td>
+<td></td>
+<td><p>Evaluation of the argument.</p></td>
+</tr>
+<tr class="row-even"><td><p>Exec</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">exec</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'x'</span></code> or <code class="docutils literal notranslate"><span class="pre">'exec'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'exec'</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">'single'</span></code></p></td>
+<td><p>Execs the argument and returns None.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'t'</span></code> or <code class="docutils literal notranslate"><span class="pre">'type'</span></code></p></td>
+<td></td>
+<td><p>The type of the argument after it has been evaluated.</p></td>
+</tr>
+</tbody>
+</table>
+---
+# Function Macros Annotations
+
+.big[Say we have a function `func` with the following annotations,]
+
+```python
+def func(a, b : 'AST', c : compile):
+    pass
+```
+
+--
+
+.big[In a macro call of `func!()`,
+
+* `a` will be evaluated with `str` since no annotation was provided,
+* `b` will be parsed into a syntax tree node, and
+* `c` will be compiled into code object since the builtin `compile()` function
+  was used as the annotation.
+]
+
+--
+
+.center.large[✨🤯✨]
+
 ---
 # Context Macros
+
+Context macros use `with!` to capture everything after the colon in
+an otherwise normal with-statement.
+
+--
+
+This provides anonymous & onymous blocks.
+
+--
+
+```python
+with! x:
+    y = 10
+    print(y)
+```
+
+--
+
+This can be thought of as equivalent to:
+
+```python
+x.macro_block = 'y = 10\nprint(y)\n'
+x.macro_globals = globals()
+x.macro_locals = locals()
+with! x:
+    pass
+```
+
+--
+
+The `macro_block` string is dedented.
+
+--
+
+The `macro_*` attrs are set before the context manager is entered so
+the `__enter__()` method may use them.
+
+--
+
+The `macro_*` attributes are not cleaned up likewise for `__exit__()` method.
+
+---
+# Context Macros
+
+.big[By default, macro blocks are returned as a string.]
+
+--
+
+.big[However, like with function macro arguments, the kind of `macro_block` is
+determined by a special annotation.]
+
+--
+
+.big[This annotation is given via the `__xonsh_block__` attribute on the context manager
+itself.]
+
+--
+
+.big[This allows the block to be interpreted as an AST, byte compiled, etc.]
+
+---
+# Context Macros Example
+
+```python
+import xml.etree.ElementTree as ET
+
+class XmlBlock:
+
+    # make sure the macro_block comes back as a string
+    __xonsh_block__ = str
+
+    def __enter__(self):
+        # parse and return the block on entry
+        root = ET.fromstring(self.macro_block)
+        return root
+
+    def __exit__(self, *exc):
+        # no reason to keep these attributes around.
+        del self.macro_block, self.macro_globals, self.macro_locals
+```
+
+--
+
+```python
+with! XmlBlock() as tree:
+    <note>
+      <to>You</to>
+      <from>Xonsh</from>
+      <heading>Don't You Want Me, Baby</heading>
+      <body>
+        You know I don't believe you when you say that you don't need me.
+      </body>
+    </note>
+
+print(tree.tag)  # will display 'note'
+```
+
 ---
 # Exercises
+
+1. Run the `timeit` command on formatting the string `"the answer is: {}"` with
+   the integer value `42` using a subprocess macro.
+   <details><pre><code class="bash">$ timeit! "the answer is: {}".format(42)
+   10000000 loops, best of 3: 169 ns per loop
+   </code></pre></details>
+2. Call the standard library `importlib.import_module()` function as a macro
+   to import a module, such as `os` or `sys` without an explicit string.
+   <details><pre><code class="bash">$ importlib.import_module!(os)
+   &lt;module 'os' from '/home/scopatz/miniconda/lib/python3.7/os.py'&gt;
+   </code></pre></details>
+3. Write a `JsonBlock` contenxt manager that can be used to embed JSON
+   into your xonsh code.
+   <details><pre><code class="python">import json
+
+   class JsonBlock:
+
+      def __enter__(self):
+          return json.loads(self.macro_block)
+
+      def __exit__(self, *exc):
+          del self.macro_block, self.macro_globals, self.macro_locals
+   </code></pre></details>
+
 ---
 class: center, middle, inverse
 name: advanced-configuration
