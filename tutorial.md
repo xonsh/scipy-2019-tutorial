@@ -1365,10 +1365,10 @@ def lemon(args, stdin=None, stdout=None, stderr=None, spec=None, stack=None):
 
 --
 
-.center[.bigger[Please `stack` Exercises]]
+.center[.bigger[Please `stack` responsibly]]
 
 ---
-# responsibly
+# Exercises
 
 1. Write a callable alias `frankenstein`, which provides the
    content of Mary Shelley's classic novel,
