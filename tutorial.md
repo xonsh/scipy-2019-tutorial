@@ -1602,6 +1602,43 @@ omg user gil
 ---
 class: center, middle, inverse
 name: macros
+
+---
+# Event exercises
+
+1. "Fix" the previous `on_envvar_change` example to only print new environment
+   variables if they aren't `CWD` or `OLDCWD`
+
+   <details><pre><code class="python">
+   @events.on_envvar_change
+   def print_env(name, oldvalue, newvalue):
+       if name not in ["CWD", "OLDCWD"]:
+           print(f"envvar {name} changed from {oldvalue} -> {newvalue}")
+   </code></pre></details>
+
+2. Look at the `__doc__` for `events.on_postcommand` and use it to create a post
+   command hook that sets the `$RIGHT_PROMPT` to display the starting and ending
+   timestamps of the previous command. (`$RIGHT_PROMPT` needs to be a string)
+
+   <details><pre><code class="python">
+   @events.on_postcommand
+   def update_rprompt(ts, **kwargs):
+       $RIGHT_PROMPT = f"{ts[0]} -> {ts[1]}"
+   </code></pre></details>
+
+--
+
+3. `pop` the `on_envvar_change` handler off and update it to also ignore `RIGHT_PROMPT`
+   <details><pre><code class="python">
+   events.on_envvar_change.pop()
+
+   @events.on_envvar_change
+   def print_env(name, oldvalue, newvalue):
+       if name not in ["CWD", "OLDCWD", "RIGHT_PROMPT"]:
+           print(f"envvar {name} changed from {oldvalue} -> {newvalue}")
+   </code></pre></details>
+
+---
 # Macros
 ---
 name: what-is-a-macro
