@@ -2162,14 +2162,97 @@ name: advanced-configuration
 class: center, middle, inverse
 name: case-study
 # Case Study
-A Composable Machine Learning Tool
+## Disentangling results
+
 ---
-#
+# MRI Data
+
+You are working in a lab that is concerned with MRIs of mouse lemurs.
+
+What's a mouse lemur, you ask?
+
+--
+
+![lemur](./mouse-lemur-with-flowers.jpg)
+
+
 ---
-#
+class: center, middle, inverse
+# FOCUS, THIS IS SCIENCE
 ---
-#
+# Where were we?
+
+You are working in a lab examining MRI data of mouse lemurs.
+The data set you need is on a webserver set up by the post-doc who disappeared last week.
+
+--
+
+But we have some bad news.
+
+--
+
+A lot of it.
+
 ---
-#
+# The state of the ~nation~ data
+
+The post-doc uses `bash` to handle all of the data collection.
+
+He didn't know how to make sure different datasets were saved to separate
+directories, so he added a random 4-digit integer to the end of each `nii.gz`
+file.
+
+But, in the script, he neglected to add the same random number to the end of the
+corresponding `json` metadata file and... well... we don't know if these are our
+mouse lemur scans, or if they're cervical spine scans...
+
+--
+
+To make matters worse -- these files are kind of big, and the post-doc's
+webserver is at his house. We really don't want to have to download all of these
+files if we don't have to.
+
 ---
-#
+# But don't despair!
+
+We know a couple of things:
+
+--
+
+* All of the files follow the naming convention `sub-{:02d}_{:04d}.nii.gz`
+
+--
+
+* While `nii.gz` files are pretty large, they have some identifying information in the first 348 bytes of the file
+
+--
+
+* We're pretty sure there are 19 mouse lemur scans
+
+--
+
+* The cervical spine study going on at the lab next door (hence the overlapping files) only has 6 subjects
+
+--
+
+---
+# Plan of action
+
+There is a great Python library for handling MRI data called `nibabel` -- you can install it by running
+
+```bash
+conda install -c conda-forge nibabel
+```
+
+1. Install `nibabel`
+2. Use `curl` to get the file-list from the webserver -- it isn't formatted super well and will take some massaging.
+3. Use `curl` to download only the header-portion of the files
+4. Load the files into `nibabel` and inspect the `header` attribute and see if
+   we can figure out how to separate the two sets of scans.
+
+**Note**:
+```
+curl -r 0-347 -O path/to/file
+```
+will download only the first 348 bytes of a given file and save it with the same
+name locally.
