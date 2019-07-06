@@ -60,7 +60,7 @@ user@shell ~ $
 Now to check that everything is working, run `xonfig`,
 
 ```bashcon
-$ xontrib
+$ xonfig
 +------------------|----------------------+
 | xonsh            | 0.9.6.dev33          |
 | Git SHA          | 626b94db             |
@@ -98,7 +98,7 @@ class: center, middle
 3. [Callable Aliases](#callable-aliases)
 4. [Events](#events)
 5. [Macros](#macros)
-6. [Advanced Confoguration](#adv-config)
+6. [Advanced Configuration](#adv-config)
 7. [Case Study](#case-study)
 ]
 ---
@@ -385,7 +385,7 @@ Also stock support for `source-zsh` and `source-cmd`!
 
 --
 
-.big[This is just a special `*.xsh` file that is loaded up before
+.big[This is a special `*.xsh` file that is loaded up before
 almost anything else.]
 
 --
@@ -484,7 +484,7 @@ tutorial.md
 ]
 .right-column[
 
-And it really is a `str` with all the methods you would expect:
+And it's a `str` with all the methods you would expect:
 
 ]
 
@@ -607,7 +607,7 @@ $ for i, loc in enumerate(!(ls)):
 ]
 .right-column[
 
-`$[]` and `![]` are the uncaptured subprocess expressions. They are very similar
+`$[]` and `![]` are the uncaptured subprocess expressions. They are similar
 to `$()` and `!()` with the notable difference that they stream output to
 `stdout`.
 
@@ -847,7 +847,7 @@ Ready for super-charged file matching?
 --
 .right-column-tight[
 
-You can wrap a regular expression in ` `` ` and it will return a list of
+You can wrap a regular expression in ` ``` and it will return a list of
 matching files and directories.
 ]
 --
@@ -882,7 +882,7 @@ $ [f.lower() for f in `.*.md`]
 
 .right-column[
 
-If you prefer globs over regex, just prepend a `g` to your tick expression:
+If you prefer globs over regex, prepend a `g` to your tick expression:
 
 ```bash
 $ g`*.md`
@@ -1005,7 +1005,7 @@ $ p
 PosixPath('/home/gil/github.com')
 ```
 
-Pretty cool, huh?
+Cool, huh?
 ]
 
 ---
@@ -1172,7 +1172,7 @@ allowing functions (callables) to be executed in subprocess mode...]
 
 --
 
-.big[...just like any other command!]
+.big[...like any other command!]
 
 <div style="text-align:center;">
 <img src="large_surfin_turtle__24434.1458626022.webp" style="width:200px;"/>
@@ -1249,7 +1249,7 @@ def apple(args):
 
 --
 
-The callable alias just needs to be the first element of a command:
+The callable alias needs to be the first element of a command:
 
 ```bash
 $ @(apple) core
@@ -1468,7 +1468,7 @@ The directory changed from /home/gil/github.com/xonsh to /home/gil/github.com/xo
 
 Um... how do I make this stop?
 
-That was a pretty verbose event handler we created.  Let's turn it off.
+That was a verbose event handler we created.  Let's turn it off.
 
 Each event has an associated `set` of `handlers`. The simplest way to remove a
 handler is to `pop` it off.
@@ -1566,7 +1566,7 @@ Nothing.
 ---
 # Example Event continued
 
-Not nothing, truly. The event _did_ fire, we just weren't listening. What do we
+Not nothing, truly. The event _did_ fire, but we weren't listening. What do we
 need to add?
 
 --
@@ -1582,7 +1582,7 @@ Something suitably chastening -- this person did just delete your computer, afte
 ```bash
 $ @events.never_run_this
 ° def WHO_DID_IT():
-°     print(f"omg user {$(whoami)} just DELETED YOUR COMPUTER")
+°     print(f"omg user {$(whoami)} DELETED YOUR COMPUTER")
 ```
 
 --
@@ -1594,7 +1594,7 @@ Now, go ahead and delete your computer again:
 ```bash
 $ delete_my_computer()
 omg user gil
- just DELETED YOUR COMPUTER
+ DELETED YOUR COMPUTER
 ```
 
 ---
@@ -1860,7 +1860,7 @@ g!([y, 43, 44], f!(z))
 ---
 # Function Macros
 
-.big[What actually happens to the arguments depends on the function definition.]
+.big[The function definition determines what happens to the arguments]
 
 --
 
@@ -1878,7 +1878,7 @@ def identity(x : str):
 
 --
 
-.big[Calling this normally in Python will just return the same object we put in,
+.big[Calling this normally in Python will return the same object we put in,
 even if it is not a string!]
 
 ---
@@ -2224,14 +2224,14 @@ The data set you need is on a webserver set up by the post-doc who disappeared l
 
 --
 
-But we have some bad news.
+.big[But we have some bad news.]
 
 --
 
-A lot of it.
+.big[A lot of it.]
 
 ---
-# The state of the ~nation~ data
+# The state of the ~~nation~~ data
 
 The post-doc uses `bash` to handle all of the data collection.
 
@@ -2245,8 +2245,13 @@ mouse lemur scans, or if they're cervical spine scans...
 
 --
 
+He also ran `rm` with an overly permissive `glob` and deleted all of the `json`
+metadata files.
+
+--
+
 To make matters worse -- these files are kind of big, and the post-doc's
-webserver is at his house. We really don't want to have to download all of these
+webserver is at his house. We don't want to have to download all of these
 files if we don't have to.
 
 ---
@@ -2260,11 +2265,11 @@ We know a couple of things:
 
 --
 
-* While `nii.gz` files are pretty large, they have some identifying information in the first 348 bytes of the file
+* While `nii.gz` files are a bit large, they have some identifying information in the first 348 bytes of the file
 
 --
 
-* We're pretty sure there are 19 mouse lemur scans
+* We're sure there are 19 mouse lemur scans
 
 --
 
@@ -2287,9 +2292,10 @@ conda install -c conda-forge nibabel
 4. Load the files into `nibabel` and inspect the `header` attribute and see if
    we can figure out how to separate the two sets of scans.
 
-**Note**:
+.footnote[
+**Note:**
 ```
 curl -r 0-347 -O path/to/file
 ```
 will download only the first 348 bytes of a given file and save it with the same
-name locally.
+name locally.]
