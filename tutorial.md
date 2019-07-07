@@ -115,7 +115,7 @@ name: xonsh-lang-basics
 # Xonsh Language Basics
 ---
 name: xonsh-as-a-python-interpreter
-# Xonsh as a Python Interpreter 🐍
+# 🐍 Xonsh as a Python Interpreter
 .big[Xonsh is a superset Python 3: 🐌⊇🐍]
 
 --
@@ -140,7 +140,7 @@ name: xonsh-as-a-python-interpreter
 .large[🤹]
 </div>
 ---
-# Exercises ⛹️‍♀️
+# 🚣‍♀️ Exercises
 At the command line,
 
 1. Compute the product of 2, 3, & 7.
@@ -162,8 +162,8 @@ At the command line,
    </code><pre></details>
 
 ---
-# Xonsh as a Shell
-.big[Xonsh is also a **shell language** 🐚]
+# 🐚 Xonsh as a Shell
+.big[Xonsh is also a **shell language**!]
 
 --
 
@@ -188,9 +188,9 @@ and we have one simple rule:]
 .center[.bigger[**Python always wins!**] .large[<br/>🥇🐍🥇]]
 
 ---
-# Running Commands
+# 🏃🏾‍♀️Running Commands
 
-.big[The purpose of a shell, of course, is to run commands!🏃🏾‍♀️]
+.big[The purpose of a shell, of course, is to run commands!]
 
 --
 
@@ -216,7 +216,7 @@ Wow Mom!
 .big[Under the covers, xonsh is using Python's `subprocess` module.]
 
 ---
-# Environment Variables 🌍
+# 🗻 Environment Variables
 
 Environment variables are written as a `$` followed by a name.
 
@@ -242,7 +242,7 @@ Coming from Python, these should look and feel like any other variable,
 except that they live in the environment.
 
 ---
-# Environment Lookup with `${expr}` 🔎
+# 🔎 Environment Lookup with `${expr}`
 
 Sometimes you might not know the name of the environment variable,
 or you might want to compute the name programatically, or maybe it
@@ -273,7 +273,7 @@ $ ${"HO" + "ME"}
 🚨 In xonsh, they have distinct meanings.
 
 ---
-# The Environment Itself `${...}`
+# 🔄 The Environment Itself `${...}`
 
 If you ever need access to the environment object, you can grab it by
 passing in an ellipsis as the lookup expression, i.e. `${...}`.
@@ -310,7 +310,7 @@ True
 ```
 
 ---
-# The `source` command 🌄
+# 🌄 The `source` command
 
 The `source` command:
 
@@ -354,7 +354,7 @@ $ combine()
 ```
 
 ---
-# `source-foreign` 🛸
+# 🛸 `source-foreign`
 
 Unlike other languages, xonsh enables you to source scripts written in
 shells other than xonsh (or Python).
@@ -390,7 +390,7 @@ it-me on drums!
 Also stock support for `source-zsh` and `source-cmd`!
 
 ---
-# The `xonshrc` configuation file 🔧
+# 🔧 The `xonshrc` configuation file
 
 .big[Xonsh's main config file is located at `~/.xonshrc`.]
 
@@ -419,7 +419,7 @@ $XONSH_SHOW_TRACEBACK = True
 is available at [https://xon.sh/envvars.html](https://xon.sh/envvars.html)]
 
 ---
-# Exercises 🚴‍♂️
+# 🚴 Exercises
 
 1. Set a random integer to the environment variable `$SECRET`.
    <details><pre><code class="python">import random
@@ -450,12 +450,12 @@ class: center, middle, inverse
 name: xonsh-lang-basics
 # Mixing Python and Subprocess Modes
 ---
-# Subprocess operators
+# 🔑 Subprocess operators
 
 `xonsh` makes using `subprocess` simple.
 
 ---
-# Captured subprocesses 🔏
+# 🔐 Captured subprocesses
 
 .left-column[
   ## `$()`
@@ -488,7 +488,7 @@ tutorial.md
 
 
 ---
-# Captured subprocesses 🔏
+# 🔐 Captured subprocesses
 
 .left-column[
   ## `$()`
@@ -520,7 +520,7 @@ $ x.split("\n")
 
 
 ---
-# Captured subprocesses 🔏
+# 🔐 Captured subprocesses
 
 .left-column[
   ## `$()`
@@ -555,7 +555,7 @@ tutorial.md
 
 
 ---
-# Captured subprocesses 🔏
+# 🔐 Captured subprocesses
 
 .left-column[
   ## `$()`
@@ -583,7 +583,7 @@ False
 ]
 
 ---
-# Captured subprocesses 🔏
+# 🔐 Captured subprocesses
 
 .left-column[
   ## `$()`
@@ -609,7 +609,7 @@ $ for i, loc in enumerate(!(ls)):
 ]
 
 ---
-# Uncaptured subprocesses 🔓
+# 🔓 Uncaptured subprocesses
 
 .left-column[
   ## `$()`
@@ -625,7 +625,7 @@ to `$()` and `!()` with the notable difference that they stream output to
 ]
 
 ---
-# Uncaptured subprocesses 🔓
+# 🔓 Uncaptured subprocesses
 
 .left-column[
   ## `$()`
@@ -649,7 +649,7 @@ README.md  default.css
 ]
 
 ---
-# Uncaptured subprocesses 🔓
+# 🔓 Uncaptured subprocesses
 
 .left-column[
   ## `$()`
@@ -684,7 +684,7 @@ $ x.alias
 ]
 
 ---
-# Uncaptured subprocesses exercises 🧘‍♂️
+# 🧘 Uncaptured subprocesses exercises
 
 .left-column[
   ## `$()`
@@ -702,7 +702,7 @@ and get a sense of what information is in there.
 ]
 
 ---
-# Subprocess Operators: A helpful mnemonic(?)
+# 🧠 Subprocess Operators: A helpful mnemonic(?)
 
 .left-column[
   ## `$()`
@@ -1020,7 +1020,7 @@ Cool, huh?
 ]
 
 ---
-# Exercises 🏋️‍
+# 🤽‍♀️ Exercises
 
 
 
@@ -1037,7 +1037,7 @@ name: the-env
 # The Environment
 
 ---
-# Environment
+# 🗻 Environment
 
 All of `xonsh`'s environment variables live in `__xonsh__.env`.
 
@@ -1070,7 +1070,7 @@ configurable: True
 ```
 
 ---
-# Typing & Detyping
+# 🐫 Typing & Detyping
 
 `xonsh` environment variables are Python objects. This means they also have
 types like Python objects. Sometimes these types are imposed based on a variable
@@ -1090,7 +1090,7 @@ Other variables are boolean, others are ints. Whatever their type, in `xonsh`
 you always have access to the true object, not a string representation.
 
 ---
-# Detyping
+# 🐪 Detyping
 
 `xonsh` automatically converts variables to strings whenever it feeds them to
 subprocess commands.
@@ -1117,7 +1117,7 @@ $ ${...}.detype().get("PATH")
 ```
 
 ---
-# Environment Swapping
+# 🦙 Environment Swapping
 
 There are a couple of other useful methods on `${...}`, in particular, the
 `swap()` method is useful for temporarily setting environment variables.
@@ -1134,7 +1134,7 @@ $SOMEVAR
 ```
 
 ---
-# Exercises 🤸‍♂️
+# 🤸‍ Exercises
 
 1. Try using `getpass.getpass()` with `swap()` to set your "password" in an environment variable temporarily.
 
@@ -1173,7 +1173,7 @@ class: center, middle, inverse
 name: callable-aliases
 # Callable Aliases
 ---
-# Callable Aliases
+# 🍱 Callable Aliases
 
 .big[We've now seen how to exchange code between Python and subprocess mode.]
 
@@ -1195,7 +1195,7 @@ allowing functions (callables) to be executed in subprocess mode...]
 </div>
 
 ---
-# Callable Aliases
+# 🍱 Callable Aliases
 
 .big[This works for any Python function that adheres to a certain set of
 known signatures. (So not *any* function.)]
@@ -1211,7 +1211,7 @@ in the builtin `aliases` dictionary, along side the more normal aliases.]
 normal subproess commands and aliases.]
 
 ---
-# Function signatures: Nothing!
+# 🍌 Function signatures: Nothing!
 
 In the simplest case, the alias takes no arguments and returns a string
 or an integer return code.
@@ -1242,7 +1242,7 @@ $ del aliases['banana']
 ```
 
 ---
-# Function signatures: The Loneliest
+# 🍏 Function signatures: The Loneliest
 
 Callable aliases may also optionally take command-line options
 as the first positional argument.
@@ -1278,7 +1278,7 @@ too much company!
 ```
 
 ---
-# Function signatures: Fourtified
+# 🍇 Function signatures: Fourtified
 
 Standard streams are also able to be passed in as keyword
 arguments whose defaults are `None`.
@@ -1314,7 +1314,7 @@ be passed in if the latter ones are. For example, if you want to use
 `stdout` you have to accept `stdin` but not `stderr`.
 
 ---
-# Function signatures: A Kiwious Spectacle
+# 🥝 Function signatures: Very Kiwious
 
 The command specification `spec` is available as the next keyword argument.
 
@@ -1352,7 +1352,7 @@ $ $(kiwi)  # captured
 ```
 
 ---
-# Function signatures: Framed!
+# 🍋 Function signatures: Framed!
 
 The final form takes a `stack` argument as well.
 
@@ -1384,7 +1384,7 @@ def lemon(args, stdin=None, stdout=None, stderr=None, spec=None, stack=None):
 .center[.bigger[Please `stack` responsibly]]
 
 ---
-# Exercises 🤾‍♀️
+#  🤾‍♀️Exercises
 
 1. Write a callable alias `frankenstein`, which provides the
    content of Mary Shelley's classic novel,
@@ -1434,7 +1434,7 @@ name: events
 # Events
 
 ---
-# Event Handlers
+# 🥳 Event Handlers
 
 Yay for events!  An event is an... event?
 
@@ -1452,7 +1452,7 @@ many functions that are all triggered by a single event firing.
 Let's look at an example!
 
 ---
-# `events.on_chdir`
+# 📁 `events.on_chdir`
 
 There are several events that are already registered with `xonsh` (we'll cover
 how to add _new_ events in a little bit).
@@ -1480,7 +1480,7 @@ The directory changed from /home/gil/github.com/xonsh to /home/gil/github.com/xo
 ```
 
 ---
-# Event Management
+# 🎊 Event Management
 
 Um... how do I make this stop?
 
@@ -1498,7 +1498,7 @@ Now that we can move around without the shell yelling at us, let's look at that
 example in-depth.
 
 ---
-# Handler Registration
+# 🎫 Handler Registration
 
 You can register a handler by decorating a function with the event object:
 
@@ -1530,7 +1530,7 @@ The type-hint-esque signature tells us which variable names to expect and their
 types. (If you don't want to deal with them, you can capture them using `**kwargs`)
 
 ---
-# When events are fired
+# 📆 When events are fired
 
 Some events are fired because `xonsh` has them set up to `fire` already. Others
 `fire` when you tell them to. Many event names are self-descriptive, but if
@@ -1542,7 +1542,7 @@ Let's walk through defining our own event, setting it to fire, then set up a
 handler to react to it.
 
 ---
-# Example Event
+# 👩‍💻Example Event
 
 First we have to create the new event. Believe it or not, to create an event,
 you create a docstring for the event. This is truly self-documenting code.
@@ -1580,7 +1580,7 @@ Now run `delete_my_computer`.  What happened?
 Nothing.
 
 ---
-# Example Event continued
+# 👩‍💻Example Event continued
 
 Not nothing, truly. The event _did_ fire, but we weren't listening. What do we
 need to add?
@@ -1614,7 +1614,7 @@ omg user gil
 ```
 
 ---
-# Event exercises 🏊‍♀️
+# 🏇 Event exercises
 
 1. "Fix" the previous `on_envvar_change` example to only print new environment
    variables if they aren't `CWD` or `OLDCWD`
@@ -1654,7 +1654,7 @@ name: macros
 # Macros
 ---
 name: what-is-a-macro
-# What is a Macro
+# 🔬 What is a Macro
 
 .big[A **macro** is syntax that replaces a smaller amount of code with a
 larger expression, syntax tree, code object, etc. after the macro has been evaluated.]
@@ -1700,7 +1700,7 @@ Lisp, Forth, Julia, etc.]
 .big[If these seem scary, Jupyter magics `%` and `%%` are macros! 🧙]
 
 ---
-# What is a Macro
+# 🔬 What is a Macro
 
 .big[Macros use a special `!` syntax. (Rust never sleeps, after all.)]
 
@@ -1712,22 +1712,23 @@ Lisp, Forth, Julia, etc.]
 
 <br/>
 
-.bigger.center[**Subprocess Macros**]
+.bigger.center[🔎 **Subprocess Macros** 🔎]
+
 
 --
 
 <br/>
 
-.bigger.center[**Function Macros**]
+.bigger.center[📷 **Function Macros** 📷]
 
 --
 
 <br/>
 
-.bigger.center[**Context Macros**]
+.bigger.center[🎥 **Context Macros** 🎥]
 
 ---
-# Subprocess Macros
+# 🔎 Subprocess Macros
 
 Subprocess macros turn everything after an `!` in a subprocess call into
 a single string argument that is passed into the command.
@@ -1771,7 +1772,7 @@ x  y       z
 ```
 
 ---
-# Subprocess Macros
+# 🔎 Subprocess Macros
 
 Macros pause *all* syntax, even fancy xonsh bits like environment
 variables.
@@ -1802,7 +1803,7 @@ I am it-me and I still live at $HOME
 ```
 
 ---
-# Subprocess Macros
+# 🔎 Subprocess Macros
 
 This is particularly useful whenever you need to write code as
 string and hand that source off to a command.
@@ -1835,7 +1836,7 @@ $ python -c ! import os; print(os.path.abspath("/"))
 ```
 
 ---
-# Function Macros
+# 📷 Function Macros
 
 Xonsh supports Rust-like macros that are based on normal Python callables.
 
@@ -1870,7 +1871,7 @@ g!([y, 43, 44], f!(z))
 ```
 
 ---
-# Function Macros
+# 📷 Function Macros
 
 .big[The function definition determines what happens to the arguments]
 
@@ -1894,7 +1895,7 @@ def identity(x : str):
 even if it is not a string!]
 
 ---
-# Function Macros
+# 📷 Function Macros
 
 .big[<u>Normal Python Call</u>:]
 
@@ -1923,7 +1924,7 @@ even if it is not a string!]
 ```
 
 ---
-# Function Macros
+# 📷 Function Macros
 
 .big[Each macro argument is stripped prior to passing it to the macro.]
 
@@ -1948,7 +1949,7 @@ even if it is not a string!]
 </div>
 
 ---
-# Function Macros
+# 📷 Function Macros
 
 .bigger[Some truly nefarious examples:]
 
@@ -1965,7 +1966,7 @@ even if it is not a string!]
 ```
 
 ---
-# Function Macros Annotations
+# 📷 Function Macros Annotations
 
 <table class="docutils align-default" id="id2">
 <colgroup>
@@ -2005,7 +2006,7 @@ even if it is not a string!]
 </tbody>
 </table>
 ---
-# Function Macros Annotations
+# 📷 Function Macros Annotations
 
 <table class="docutils align-default" id="id2">
 <colgroup>
@@ -2045,7 +2046,7 @@ even if it is not a string!]
 </tbody>
 </table>
 ---
-# Function Macros Annotations
+# 📷 Function Macros Annotations
 
 .big[Say we have a function `func` with the following annotations,]
 
@@ -2069,7 +2070,7 @@ def func(a, b : 'AST', c : compile):
 .center.large[✨🤯✨]
 
 ---
-# Context Macros
+# 🎥 Context Macros
 
 Context macros use `with!` to capture everything after the colon in
 an otherwise normal with-statement.
@@ -2112,7 +2113,7 @@ the `__enter__()` method may use them.
 The `macro_*` attributes are not cleaned up likewise for `__exit__()` method.
 
 ---
-# Context Macros
+# 🎥 Context Macros
 
 .big[By default, macro blocks are returned as a string.]
 
@@ -2131,7 +2132,7 @@ itself.]
 .big[This allows the block to be interpreted as an AST, byte compiled, etc.]
 
 ---
-# Context Macros Example
+# 🎥 Context Macros Example
 
 ```python
 import xml.etree.ElementTree as ET
@@ -2168,7 +2169,7 @@ print(tree.tag)  # will display 'note'
 ```
 
 ---
-# Exercises 🤼‍♂️
+# 🤼‍♂️Exercises
 
 1. Run the `timeit` command on formatting the string `"the answer is: {}"` with
    the integer value `42` using a subprocess macro.
@@ -2214,7 +2215,7 @@ name: case-study
 ## Disentangling results
 
 ---
-# MRI Data
+# ⚛️ MRI Data
 
 You are working in a lab that is concerned with MRIs of mouse lemurs.
 
@@ -2230,7 +2231,7 @@ What's a mouse lemur, you ask?
 class: center, middle, inverse
 # FOCUS, THIS IS SCIENCE
 ---
-# Where were we?
+# 🧭 Where were we?
 
 You are working in a lab examining MRI data of mouse lemurs.
 The data set you need is on a webserver set up by the post-doc who disappeared last week.
@@ -2244,7 +2245,7 @@ The data set you need is on a webserver set up by the post-doc who disappeared l
 .big[A lot of it.]
 
 ---
-# The state of the ~~nation~~ data
+# 💾 The state of the ~~nation~~ data
 
 The post-doc uses `bash` to handle all of the data collection.
 
@@ -2268,7 +2269,7 @@ webserver is at his house. We don't want to have to download all of these
 files if we don't have to.
 
 ---
-# But don't despair!
+# 🤦‍♀️ But don't despair!
 
 We know a couple of things:
 
@@ -2291,7 +2292,7 @@ We know a couple of things:
 --
 
 ---
-# Plan of action
+# 👩‍🔬Plan of action
 
 There is a great Python library for handling MRI data called `nibabel` -- you can install it by running
 
