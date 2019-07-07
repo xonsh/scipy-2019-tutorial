@@ -163,7 +163,7 @@ At the command line,
 
 ---
 # Xonsh as a Shell
-.big[Xonsh is also a **shell language**.]
+.big[Xonsh is also a **shell language** 🐚]
 
 --
 
@@ -185,7 +185,7 @@ and we have one simple rule:]
 
 --
 
-.center[.bigger[**Python always wins!**]]
+.center[.bigger[**Python always wins!**] .large[<br/>🥇🐍🥇]]
 
 ---
 # Running Commands
