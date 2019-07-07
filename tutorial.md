@@ -10,7 +10,7 @@ layout: false
 # Install & Setup
 
 .left-column[
-  ## Install
+  ## Install 📩
 ]
 .right-column[
   First, let's install xonsh (if you haven't already).
@@ -36,8 +36,8 @@ name: startup-xonsh
 # Install & Setup
 
 .left-column[
-  ## Install
-  ## Setup
+  ## Install 📩
+  ## Setup 🧗
 ]
 .right-column[
 Now to startup xonsh, simply run the xonsh command,
@@ -52,9 +52,9 @@ user@shell ~ $
 # Install & Setup
 
 .left-column[
-  ## Install
-  ## Setup
-  ## Sanity Check
+  ## Install 📩
+  ## Setup 🧗
+  ## Sanity Check 🔩
 ]
 .right-column[
 Now to check that everything is working, run `xonfig`,
