@@ -115,8 +115,8 @@ name: xonsh-lang-basics
 # Xonsh Language Basics
 ---
 name: xonsh-as-a-python-interpreter
-# Xonsh as a Python Interpreter
-.big[Xonsh is a superset Python 3.]
+# Xonsh as a Python Interpreter 🐍
+.big[Xonsh is a superset Python 3: 🐌⊇🐍]
 
 --
 
@@ -136,6 +136,9 @@ name: xonsh-as-a-python-interpreter
 --
 
 .big[Let's try a few of these out!]
+<div style="text-align:center">
+.large[🤹]
+</div>
 ---
 # Exercises
 At the command line,
