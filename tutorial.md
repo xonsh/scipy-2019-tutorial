@@ -847,7 +847,7 @@ Ready for super-charged file matching?
 --
 .right-column-tight[
 
-You can wrap a regular expression in ` ``` and it will return a list of
+You can wrap a regular expression in ` `` ` and it will return a list of
 matching files and directories.
 ]
 --
@@ -1598,12 +1598,6 @@ omg user gil
 ```
 
 ---
-# Exercises
----
-class: center, middle, inverse
-name: macros
-
----
 # Event exercises
 
 1. "Fix" the previous `on_envvar_change` example to only print new environment
@@ -1639,6 +1633,8 @@ name: macros
    </code></pre></details>
 
 ---
+class: center, middle, inverse
+name: macros
 # Macros
 ---
 name: what-is-a-macro
@@ -2210,8 +2206,9 @@ What's a mouse lemur, you ask?
 
 --
 
-![lemur](./mouse-lemur-with-flowers.jpg)
-
+<div style="text-align:center;">
+<img src="mouse-lemur-with-flowers.jpg" style="width:500px;"/>
+</div>
 
 ---
 class: center, middle, inverse
