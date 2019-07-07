@@ -455,7 +455,7 @@ name: xonsh-lang-basics
 `xonsh` makes using `subprocess` simple.
 
 ---
-# Captured subprocesses
+# Captured subprocesses 🔏
 
 .left-column[
   ## `$()`
@@ -488,7 +488,7 @@ tutorial.md
 
 
 ---
-# Captured subprocesses
+# Captured subprocesses 🔏
 
 .left-column[
   ## `$()`
@@ -520,7 +520,7 @@ $ x.split("\n")
 
 
 ---
-# Captured subprocesses
+# Captured subprocesses 🔏
 
 .left-column[
   ## `$()`
@@ -555,7 +555,7 @@ tutorial.md
 
 
 ---
-# Captured subprocesses
+# Captured subprocesses 🔏
 
 .left-column[
   ## `$()`
@@ -583,7 +583,7 @@ False
 ]
 
 ---
-# Captured subprocesses
+# Captured subprocesses 🔏
 
 .left-column[
   ## `$()`
@@ -609,7 +609,7 @@ $ for i, loc in enumerate(!(ls)):
 ]
 
 ---
-# Uncaptured subprocesses
+# Uncaptured subprocesses 🔓
 
 .left-column[
   ## `$()`
@@ -625,7 +625,7 @@ to `$()` and `!()` with the notable difference that they stream output to
 ]
 
 ---
-# Uncaptured subprocesses
+# Uncaptured subprocesses 🔓
 
 .left-column[
   ## `$()`
@@ -649,7 +649,7 @@ README.md  default.css
 ]
 
 ---
-# Uncaptured subprocesses
+# Uncaptured subprocesses 🔓
 
 .left-column[
   ## `$()`
@@ -726,7 +726,7 @@ and get a sense of what information is in there.
 
 ]
 ---
-# The Python-mode operator
+# 🐍➡️🐚 The Python-mode operator
 .left-column[
 
  ## `@()`
@@ -753,7 +753,7 @@ Hi!
 ```
 ]
 ---
-# The Python-mode operator
+# 🐍➡️🐚 The Python-mode operator
 .left-column[
 
  ## `@()`
@@ -777,7 +777,7 @@ i
 ]
 ---
 
-# The Python-mode operator
+# 🐍➡️🐚 The Python-mode operator
 .left-column[
 
  ## `@()`
@@ -814,7 +814,7 @@ $ echo @([x for x in range(3)])
 
 ---
 
-# The Python-mode operator
+# 🐍➡️🐚 The Python-mode operator
 .left-column[
 
  ## `@()`
@@ -844,7 +844,7 @@ xonsh: subprocess mode: command not found: echo hello there
 
 ]
 ---
-# Regex ticks
+# 🔣 Regex ticks
 
 .left-column[
 
@@ -883,7 +883,7 @@ $ [f.lower() for f in `.*.md`]
 ]
 
 ---
-# Glob ticks
+# 🌟 Glob ticks
 
 .left-column[
 
@@ -912,7 +912,7 @@ $ g`**/*.md`
 ]
 
 ---
-# `xonsh` string literals
+# 🧶 `xonsh` string literals
 
 .left-column[
 
@@ -940,7 +940,7 @@ also has a few _extra_ tricks up its sleeves!
 
 ]
 ---
-# path string literals
+# 📂 path string literals
 
 .left-column[
 
@@ -976,7 +976,7 @@ Also try out using the `/` operator with a `pathlib.Path`.
 
 ]
 ---
-# formatted path string literals
+# 📂 formatted path string literals
 
 .left-column[
 
@@ -1020,12 +1020,17 @@ Cool, huh?
 ]
 
 ---
-# Exercises 🏋️‍♀️
+# Exercises 🏋️‍
 
 
 
 ---
-# Questions
+class: center, middle
+# Questions?
+
+<div style="text-align:center;">
+<img src="lotf-symbols2.png" style="width:350px;"/>
+</div>
 ---
 class: center, middle, inverse
 name: the-env
