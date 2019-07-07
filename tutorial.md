@@ -140,7 +140,7 @@ name: xonsh-as-a-python-interpreter
 .large[🤹]
 </div>
 ---
-# Exercises
+# Exercises ⛹️‍♀️
 At the command line,
 
 1. Compute the product of 2, 3, & 7.
@@ -419,7 +419,7 @@ $XONSH_SHOW_TRACEBACK = True
 is available at [https://xon.sh/envvars.html](https://xon.sh/envvars.html)]
 
 ---
-# Exercises
+# Exercises 🚴‍♂️
 
 1. Set a random integer to the environment variable `$SECRET`.
    <details><pre><code class="python">import random
@@ -684,7 +684,7 @@ $ x.alias
 ]
 
 ---
-# Uncaptured subprocesses exercises
+# Uncaptured subprocesses exercises 🧘‍♂️
 
 .left-column[
   ## `$()`
@@ -1020,7 +1020,7 @@ Cool, huh?
 ]
 
 ---
-# Exercises
+# Exercises 🏋️‍♀️
 
 
 
@@ -1129,7 +1129,7 @@ $SOMEVAR
 ```
 
 ---
-# Exercises
+# Exercises 🤸‍♂️
 
 1. Try using `getpass.getpass()` with `swap()` to set your "password" in an environment variable temporarily.
 
@@ -1379,7 +1379,7 @@ def lemon(args, stdin=None, stdout=None, stderr=None, spec=None, stack=None):
 .center[.bigger[Please `stack` responsibly]]
 
 ---
-# Exercises
+# Exercises 🤾‍♀️
 
 1. Write a callable alias `frankenstein`, which provides the
    content of Mary Shelley's classic novel,
@@ -1609,7 +1609,7 @@ omg user gil
 ```
 
 ---
-# Event exercises
+# Event exercises 🏊‍♀️
 
 1. "Fix" the previous `on_envvar_change` example to only print new environment
    variables if they aren't `CWD` or `OLDCWD`
@@ -2163,7 +2163,7 @@ print(tree.tag)  # will display 'note'
 ```
 
 ---
-# Exercises
+# Exercises 🤼‍♂️
 
 1. Run the `timeit` command on formatting the string `"the answer is: {}"` with
    the integer value `42` using a subprocess macro.
