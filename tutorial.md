@@ -89,6 +89,10 @@ $ xonfig
 ---
 class: center, middle
 # Questions?
+
+<div style="text-align:center;">
+<img src="questionsnail.jpg" style="width:300px;"/>
+</div>
 ---
 # Agenda
 
