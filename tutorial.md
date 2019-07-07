@@ -101,6 +101,10 @@ class: center, middle
 6. [Advanced Configuration](#adv-config)
 7. [Case Study](#case-study)
 ]
+
+<div style="text-align:center;">
+<img src="knight-vs-snail.jpg" style="width:600px;"/>
+</div>
 ---
 class: center, middle, inverse
 name: xonsh-lang-basics
