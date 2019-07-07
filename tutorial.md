@@ -190,7 +190,7 @@ and we have one simple rule:]
 ---
 # Running Commands
 
-.big[The purpose of a shell, of course, is to run commands!]
+.big[The purpose of a shell, of course, is to run commands!🏃🏾‍♀️]
 
 --
 
@@ -216,7 +216,7 @@ Wow Mom!
 .big[Under the covers, xonsh is using Python's `subprocess` module.]
 
 ---
-# Environment Variables
+# Environment Variables 🌍
 
 Environment variables are written as a `$` followed by a name.
 
@@ -242,7 +242,7 @@ Coming from Python, these should look and feel like any other variable,
 except that they live in the environment.
 
 ---
-# Environment Lookup with `${expr}`
+# Environment Lookup with `${expr}` 🔎
 
 Sometimes you might not know the name of the environment variable,
 or you might want to compute the name programatically, or maybe it
@@ -269,8 +269,8 @@ $ ${"HO" + "ME"}
 
 --
 
-.red[**Warning!**] In sh-langs, `$NAME` and `${NAME}` mean the same thing.
-In xonsh, they have distinct meanings.
+🚨 In sh-langs, `$NAME` and `${NAME}` mean the same thing.<br/>
+🚨 In xonsh, they have distinct meanings.
 
 ---
 # The Environment Itself `${...}`
@@ -310,7 +310,7 @@ True
 ```
 
 ---
-# The `source` command
+# The `source` command 🌄
 
 The `source` command:
 
@@ -354,7 +354,7 @@ $ combine()
 ```
 
 ---
-# `source-foreign`
+# `source-foreign` 🛸
 
 Unlike other languages, xonsh enables you to source scripts written in
 shells other than xonsh (or Python).
@@ -390,7 +390,7 @@ it-me on drums!
 Also stock support for `source-zsh` and `source-cmd`!
 
 ---
-# The `xonshrc` configuation file
+# The `xonshrc` configuation file 🔧
 
 .big[Xonsh's main config file is located at `~/.xonshrc`.]
 
