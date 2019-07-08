@@ -460,6 +460,9 @@ is available at [https://xon.sh/envvars.html](https://xon.sh/envvars.html)]
 
 ---
 class: center, middle, inverse
+# Break
+---
+class: center, middle, inverse
 name: xonsh-lang-basics
 # Mixing Python and Subprocess Modes
 ---
@@ -1356,7 +1359,7 @@ Grape says 'wrath'
 
 --
 
-Note that not all streams must be passes in, but the prior streams must
+Note that not all streams must be passed in, but the prior streams must
 be passed in if the latter ones are. For example, if you want to use
 `stdout` you have to accept `stdin` but not `stderr`.
 
@@ -1663,7 +1666,17 @@ omg user gil
 ---
 # 🏇 Event exercises
 
-1. "Fix" the previous `on_envvar_change` example to only print new environment
+2. Create a handler for `events.on_envvar_change` and have it print out the old and new value of the environment variable. (Remember to check the `__doc__` for how to use it!)
+
+   <details><pre><code class="python">
+   @events.on_envvar_change
+   def print_env(name, oldvalue, newvalue):
+        print(f"envvar {name} changed from {oldvalue} -> {newvalue}")
+   </code></pre></details>
+
+--
+
+2. "Fix" the previous `on_envvar_change` example to only print new environment
    variables if they aren't `CWD` or `OLDCWD`
 
    <details><pre><code class="python">
@@ -1672,8 +1685,10 @@ omg user gil
        if name not in ["CWD", "OLDCWD"]:
            print(f"envvar {name} changed from {oldvalue} -> {newvalue}")
    </code></pre></details>
+   
+-- 
 
-2. Look at the `__doc__` for `events.on_postcommand` and use it to create a post
+3. Look at the `__doc__` for `events.on_postcommand` and use it to create a post
    command hook that sets the `$RIGHT_PROMPT` to display the starting and ending
    timestamps of the previous command. (`$RIGHT_PROMPT` needs to be a string)
 
