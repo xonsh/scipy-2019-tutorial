@@ -124,7 +124,7 @@ Typing takes time and we don't have any time. You can almost always hit `<TAB>` 
 
 History search (several flavors)
 
-Looking for a command you typed once?  `Ctrl-R` is your friend, you can search through your history. 
+Looking for a command you typed once?  `Ctrl-R` is your friend, you can search through your history.
 
 You can also start to type a command and hit the up-arrow to see previous lines that started the same way
 
@@ -712,7 +712,7 @@ Take a few minutes to try out each of the subprocess operators.
 Use xonsh's tab completion to explore the attributes of the `CommandPipeline`s
 and get a sense of what information is in there.
 
-]
+**Note:** Tab-completion is your friend here!  Use it to help explore.
 
 ---
 # 🧠 Subprocess Operators: A helpful mnemonic(?)
@@ -1034,6 +1034,40 @@ Cool, huh?
 
 ---
 # 🤽‍♀️ Exercises
+
+1. Look up the absolute file path of every markdown file in the tutorial repo using whatever tools you want (pf-strings and glob-ticks might help!)
+
+   <details><pre><code class="python">
+   $ [pf"{path}".absolute() for path in g`*.md`]
+   [PosixPath('/home/gil/github.com/xonsh/scipy-2019-tutorial/README.md'),
+    PosixPath('/home/gil/github.com/xonsh/scipy-2019-tutorial/notes.md'),
+    PosixPath('/home/gil/github.com/xonsh/scipy-2019-tutorial/tutorial.md')]
+   </code><pre></details>
+
+2. Load up a dictionary of every conda package you have installed in your current environment.
+   (hint, "conda list --json" is your friend)
+   <details><pre><code class="python">
+   $ import json
+   $ json.loads($(conda list --json))
+   </code><pre></details>
+   
+---
+# 🤽‍♀️ Exercises (if you finish early)
+
+3. You want to set up a bus alert -- for the CTA Route 4 stop at Cottage
+   Grove(southbound). But they don't have an API. There _is_ a mobile-friendly
+   text-only version, though! Use `curl` and capture and parse the outputs to
+   just show the expected arrival time.
+
+    Here's the URL for the bus times: http://www.ctabustracker.com/bustime/wireless/html/eta.jsp?route=4&direction=Southbound&id=2828&showAllBusses=off
+
+   <details><pre><code class="python">
+   $ times = $(curl http://www.ctabustracker.com/bustime/wireless/html/eta.jsp?route=4&direction=Southbound&id=2828&showAllBusses=off)
+   $ min_count = re.findall(r"\d{1,2}&nbsp;MIN", times)
+   $ [time.replace("&nbsp;", " ").lower() for time in min_count]
+   ['9 min', '10 min']
+   </code><pre></details>
+
 
 
 
@@ -2215,6 +2249,13 @@ name: advanced-configuration
 # xontribs
 ---
 # Tips & Tricks
+
+`xonsh` has a rich plugin ecosystem (called `xontribs`) that you can explore to
+see user-submitted & maintained addons.  (Try out `xontrib list` to get started)
+
+`xonsh` is _extremely_ customizable. If you want to do a particular thing and
+don't know how, come find us and we'll help!
+
 ---
 # xontribs
 ---
