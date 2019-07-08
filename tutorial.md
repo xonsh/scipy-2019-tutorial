@@ -2358,11 +2358,11 @@ We know a couple of things:
 
 --
 
-* All of the files follow the naming convention `sub-{:02d}_{:04d}.nii.gz`
+* All of the files follow the naming convention `sub-{:02d}_{:04d}.nii`
 
 --
 
-* While `nii.gz` files are a bit large, they have some identifying information in the first 348 bytes of the file
+* While `nii` files are a bit large, they have some identifying information in the first 348 bytes of the file
 
 --
 
