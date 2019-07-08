@@ -87,6 +87,56 @@ $ xonfig
 
 ]
 ---
+# Install & Setup
+
+.left-column[
+  ## Install 📩
+  ## Setup 🧗
+  ## Sanity Check 🔩
+  ## Helpful shell tips
+]
+.right-column[
+
+We will come back to all of these things several times over the course of the tutorial, so don't worry about absorbing them all at once.
+
+If you see us do anything and you aren't sure how we did it, please ask!
+
+]
+
+--
+
+.right-column[
+Tab-completion
+
+Typing takes time and we don't have any time. You can almost always hit `<TAB>` to see a list of options for the current command (and more!)
+
+]
+---
+# Install & Setup
+
+.left-column[
+  ## Install 📩
+  ## Setup 🧗
+  ## Sanity Check 🔩
+  ## Helpful shell tips
+]
+.right-column[
+
+History search (several flavors)
+
+Looking for a command you typed once?  `Ctrl-R` is your friend, you can search through your history. 
+
+You can also start to type a command and hit the up-arrow to see previous lines that started the same way
+
+]
+--
+.right-column[
+
+What does `<thing>` do?
+
+Ask a question!  You can append a `?` to many commands to print a short helper snippet. You can add a second `?` for more details. (If you've used IPython before, this may be a familiar pattern)
+]
+---
 class: center, middle
 # Questions?
 
