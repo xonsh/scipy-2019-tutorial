@@ -273,43 +273,6 @@ $ ${"HO" + "ME"}
 🚨 In xonsh, they have distinct meanings.
 
 ---
-# 🔄 The Environment Itself `${...}`
-
-If you ever need access to the environment object, you can grab it by
-passing in an ellipsis as the lookup expression, i.e. `${...}`.
-
---
-
-```python
-$ ${...}
-xonsh.environ.Env(
-{'AUTO_CD': False,
- 'AUTO_PUSHD': False,
- 'AUTO_SUGGEST': True,
- 'AUTO_SUGGEST_IN_COMPLETIONS': False,
- 'BASH_COMPLETIONS': EnvPath(
-['/usr/share/bash-completion/bash_completion']
-),
- 'BASH_COMPLETION_USER_DIR': '/home/scopatz/miniconda/share/bash-completion',
- 'BOTTOM_TOOLBAR': '',
- ...
-})
-```
-
---
-
-This is a reference to the object that lives at `__xonsh__.env`.
-
---
-
-You can use this object to test if a variable exists:
-
-```bash
-$ "PATH" in ${...}
-True
-```
-
----
 # 🌄 The `source` command
 
 The `source` command:
