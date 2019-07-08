@@ -6,6 +6,25 @@ Bringing Python data science to your shell!
 
 ![](/ascii_conch_part_transparent_tight.png)
 ---
+# Intros
+
+* Anthony Scopatz
+
+  > Creator and maintainer, madman, poet
+
+  > Quansight
+
+  > @scopatz (github, twitter)
+
+* Gil Forsyth
+  > Contributor and maintainer, madman, poet
+
+  > Capital One
+
+  > @gforsyth (github) @gilforsyth (twitter)
+
+
+---
 layout: false
 # Install & Setup
 
@@ -2353,7 +2372,6 @@ We know a couple of things:
 
 * The cervical spine study going on at the lab next door (hence the overlapping files) only has 6 subjects
 
---
 
 ---
 # 👩‍🔬Plan of action
@@ -2377,3 +2395,11 @@ curl -r 0-347 -O path/to/file
 ```
 will download only the first 348 bytes of a given file and save it with the same
 name locally.]
+
+---
+# Final slide
+
+That's it!
+
+Thanks for attending! There's a lot more stuff we didn't have time to cover. Go
+to `xon.sh` for more information or find us at the conference and ask questions!
