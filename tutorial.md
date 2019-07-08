@@ -1666,7 +1666,9 @@ omg user gil
 ---
 # 🏇 Event exercises
 
-2. Create a handler for `events.on_envvar_change` and have it print out the old and new value of the environment variable. (Remember to check the `__doc__` for how to use it!)
+1. Create a handler for `events.on_envvar_change` and have it print out the old
+   and new value of the environment variable. (Remember to check the `__doc__`
+   for how to use it!)
 
    <details><pre><code class="python">
    @events.on_envvar_change
@@ -1686,7 +1688,8 @@ omg user gil
            print(f"envvar {name} changed from {oldvalue} -> {newvalue}")
    </code></pre></details>
    
--- 
+---
+# 🏇 Event exercises (if you finish early)
 
 3. Look at the `__doc__` for `events.on_postcommand` and use it to create a post
    command hook that sets the `$RIGHT_PROMPT` to display the starting and ending
@@ -1700,7 +1703,7 @@ omg user gil
 
 --
 
-3. `pop` the `on_envvar_change` handler off and update it to also ignore `RIGHT_PROMPT`
+4. `pop` the `on_envvar_change` handler off and update it to also ignore `RIGHT_PROMPT`
    <details><pre><code class="python">
    events.on_envvar_change.pop()
 
@@ -2243,7 +2246,7 @@ print(tree.tag)  # will display 'note'
    <details><pre><code class="bash">$ importlib.import_module!(os)
    &lt;module 'os' from '/home/scopatz/miniconda/lib/python3.7/os.py'&gt;
    </code></pre></details>
-3. Write a `JsonBlock` contenxt manager that can be used to embed JSON
+3. Write a `JsonBlock` context manager that can be used to embed JSON
    into your xonsh code.
    <details><pre><code class="python">import json
 
@@ -2261,8 +2264,6 @@ class: center, middle, inverse
 name: advanced-configuration
 # Advanced Configuration
 ---
-# xontribs
----
 # Tips & Tricks
 
 `xonsh` has a rich plugin ecosystem (called `xontribs`) that you can explore to
@@ -2271,12 +2272,6 @@ see user-submitted & maintained addons.  (Try out `xontrib list` to get started)
 `xonsh` is _extremely_ customizable. If you want to do a particular thing and
 don't know how, come find us and we'll help!
 
----
-# xontribs
----
-# lazy imports
----
-# Examples
 ---
 class: center, middle, inverse
 name: case-study
